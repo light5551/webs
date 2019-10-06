@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    div.w3-row
+        div.w3-half.w3-black.w3-container.w3-center(style='height:700px')
+            div.w3-padding-64
+                h1= picture.name
+                div.w3-left-align
+                    div.w3-margin-bottom
+                        label
+                            i URL
+                            input.w3-input.w3-border(type="text" id='url' value=picture.url)
+                        label
+                            i NAME
+                            input.w3-input.w3-border(type="text" id='name' value=picture.name)
+                        label
+                            i DESCRIPTION
+                            input.w3-input.w3-border(type="text" id='description' value=picture.description)
+                        label
+                            i AUTHOR
+                            input.w3-input.w3-border(type="text" id='author' value=picture.author)
+                        label
+                            i START PRICE
+                            input.w3-input.w3-border(type="text" id='start_price' value=picture.start_price)
+
+                    button.w3-btn.w3-green.w3-round(onclick='save('+picture.id+')') save configuratiron
+
+        div.w3-half.w3-blue-grey.w3-container(style="height:700px")
+            div.w3-padding.w3-center
+                h1= picture.name
+                img.w3-margin(src=picture.url, style="width:50%; height:50%")
+                div.w3-left-align.w3-padding-large
+                    p= picture.description
+

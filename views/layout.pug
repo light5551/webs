@@ -1,0 +1,15 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href="/stylesheets/w3.css")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Karma")
+
+    body
+        block content
+        script
+            include ../public/javascripts/jquery.min.js
+            include ../public/javascripts/save.js
+
+
