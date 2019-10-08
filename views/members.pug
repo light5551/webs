@@ -1,0 +1,57 @@
+extends layout
+
+block content
+    div.w3-top
+        div.w3-center.w3-padding-16.w3-xlarge
+            h1 AUCTION MEMBERS
+
+    div.w3-main.w3-content.w3-padding(style='max-width:1200px;margin-top:100px')
+        div.w3-row-padding.w3-padding.w3-center(id='pictures')
+            table
+                tr(class='lib_manager')
+                    th(class="td_man")
+                        input(type='button', value='Добавить участника', class='man_button', id='add_btn')
+                        div(class="modal")
+                            div(class="modal-content")
+                                h2 Добавить участника
+                                span(class='close-button')
+                                table
+                                    tr
+                                        th Имя
+                                        th
+                                            input(type='text', id="fname")
+                                    tr
+                                        th Фамилия
+                                        th
+                                            input(type='text', id='lname')
+                                    tr
+                                        th Отчество
+                                        th
+                                            input(type='text', id='oname')
+                                    tr
+                                        th Запас денег
+                                        th
+                                            input(type='text', id='mem_money')
+                                br
+                                input(type='button', value='Добавить', class='get_button', style='width:50%', onclick='save(' + "\"members\"" + ',' + "id = new Date().getMilliseconds()" + "," + "getMemberData(id)" + ')')
+                        script
+                            include ../public/javascripts/add_modal.js
+            br
+            br
+            table(id='mytable')
+                tr
+                    tr
+                        th(class='td_h') ФИО Участника
+                        th(class='td_h') Запас денег
+
+                each mem in members
+                    tr
+                        th= mem.name
+                        th= mem.money
+                        th(class="td_empty")
+                            th(class="td_light")
+                                input(type='button', value='+ 500$', class='get_button', onclick='editMember(' + mem.id + "," + "\"inc\"" + ')')
+                            th(class="td_light")
+                                input(type='button', value='- 500$', class='get_button', onclick='editMember(' + mem.id + "," + "\"dec\"" + ')')
+                            th(class="td_light")
+                                input(type='button', value='Удалить', class='get_button', onclick='editMember(' + mem.id + "," + "\"del\"" + ')')
