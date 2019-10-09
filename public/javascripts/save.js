@@ -42,6 +42,9 @@ function save(next, id = new Date().getMilliseconds(), get = getData(id)) {
     })
 }
 
+function redirect(path) {
+    window.location = window.location.origin + '/' + path;
+}
 
 function editMember(id, command) {
     console.log(id);

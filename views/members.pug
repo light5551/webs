@@ -36,6 +36,9 @@ block content
                                 input(type='button', value='Добавить', class='get_button', style='width:50%', onclick='save(' + "\"members\"" + ',' + "id = new Date().getMilliseconds()" + "," + "getMemberData(id)" + ')')
                         script
                             include ../public/javascripts/add_modal.js
+                    th(class="td_man")
+                        input(type='button', value='Галерея', class='man_button', onclick="redirect(" + "\"gallery\"" + ")")
+
             br
             br
             table(id='mytable')

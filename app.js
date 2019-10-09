@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/auction', picturesRouter);
+app.use('/gallery', picturesRouter);
 app.use('/picture', pictureRouter);
 app.use('/members', membersRouter);
 

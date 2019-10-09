@@ -23,10 +23,8 @@ router.post('/edit', function(req, res, next) {
         for (let i = 0; i < data.length; i++)
             if (data[i].id === req.body.id)
             {
-                console.log("FOUND");
                 if(req.body.command === "inc")
                 {
-                    console.log("INC");
                     data[i].money = parseInt(data[i].money) + increase_rate;
                 } else if(req.body.command === "dec")
                 {
@@ -48,7 +46,6 @@ router.post('/edit', function(req, res, next) {
                 console.log('success')
         });
     });
-
     res.send('ok');
 })
 
