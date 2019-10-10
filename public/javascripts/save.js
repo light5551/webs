@@ -12,6 +12,22 @@ function getMemberData(_id) {
     return result;
 }
 
+function getAuctionOptions() {
+    let date = $('#date').val();
+    let time = $('#time').val();
+    let sell = $('#sell').val();
+    let max_sell = $('#max_sell').val();
+    let pause = $('#pause').val();
+
+    let result = `beginDate=${date}`;
+    result += `&beginTime=${time}`;
+    result += `&sellTimeout=${sell}`;
+    result += `&maxSellTimeout=${max_sell}`;
+    result += `&pauseTimeout=${pause}`;
+
+    return result;
+}
+
 function getData(_id) {
     let id = _id;
     let url = $('#url').val();
@@ -19,6 +35,9 @@ function getData(_id) {
     let description = $('#description').val();
     let author = $('#author').val();
     let start_price = $('#start_price').val();
+    let min_step = $('#min_step').val();
+    let max_step = $('#max_step').val();
+    let involved = $('#involved').prop("checked");
 
     let result = `id=${id}`;
     result += `&url=${url}`;
@@ -26,6 +45,9 @@ function getData(_id) {
     result += `&description=${description}`;
     result += `&author=${author}`;
     result += `&start_price=${start_price}`;
+    result += `&min_step=${min_step}`;
+    result += `&max_step=${max_step}`;
+    result += `&involved=${involved}`;
 
     return result;
 }
@@ -37,7 +59,7 @@ function save(next, id = new Date().getMilliseconds(), get = getData(id)) {
         crossDomain: true,
         data: get,
         success: function(json, status) {
-            window.location = window.location.origin + '/' + next;
+            redirect(next);
         },
     })
 }

@@ -34,6 +34,9 @@ router.post('/:id', function (req, res) {
                 data[i].description= req.body.description;
                 data[i].author = req.body.author;
                 data[i].start_price = req.body.start_price;
+                data[i].min_step = req.body.min_step;
+                data[i].max_step = req.body.max_step;
+                data[i].involved = (req.body.involved === 'true');
             }
         }
         console.log(data);

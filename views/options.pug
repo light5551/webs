@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    div.w3-row
+        div.w3-black.w3-container.w3-center(style='height:600px')
+            div.w3-padding-64
+                h1 AUCTION OPTIONS
+                div.w3-left-align
+                    div.w3-margin-bottom
+                        label
+                            i START DATE
+                            input.w3-input.w3-border(type="text" id='date' value=options.beginDate)
+                        label
+                            i START TIME
+                            input.w3-input.w3-border(type="text" id='time' value=options.beginTime)
+                        label
+                            i SELL TIMEOUT (ms)
+                            input.w3-input.w3-border(type="text" id='sell' value=options.sellTimeout)
+                        label
+                            i MAXIMAL SELL TIMEOUT (ms)
+                            input.w3-input.w3-border(type="text" id='max_sell' value=options.maxSellTimeout)
+                        label
+                            i PAUSE TIMEOUT (ms)
+                            input.w3-input.w3-border(type="text" id='pause' value=options.pauseTimeout)
+                    br
+                    br
+                    button.w3-btn.w3-green.w3-round(onclick='save(' + "\"gallery\"" + ',' + "id = new Date().getMilliseconds()" + "," + "getAuctionOptions()" + ')') Save changes
+                    button.w3-btn.w3-green.w3-round.w3-margin-left(onclick='redirect(' + "\"gallery\"" + ')') Cancel

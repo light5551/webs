@@ -2,7 +2,7 @@ extends layout
 
 block content
     div.w3-row
-        div.w3-half.w3-black.w3-container.w3-center(style='height:700px')
+        div.w3-half.w3-black.w3-container.w3-center(style='height:800px')
             div.w3-padding-64
                 h1= picture.name
                 div.w3-left-align
@@ -22,13 +22,31 @@ block content
                         label
                             i START PRICE
                             input.w3-input.w3-border(type="text" id='start_price' value=picture.start_price)
+                        label
+                            i MIN AUCTION STEP
+                            input.w3-input.w3-border(type="text" id='min_step' value=picture.min_step)
+                        label
+                            i MAX AUCTION STEP
+                            input.w3-input.w3-border(type="text" id='max_step' value=picture.max_step)
+                        label
+                            br
+                            i INVOLVED IN AUCTION
+                            br
+                            br
+                            if picture.involved
+                                input.w3-large(type="checkbox" id='involved' style="width:40px; height:40px" checked)
+                            else
+                                input.w3-large(type="checkbox" id='involved' style="width:40px; height:40px")
 
-                    button.w3-btn.w3-green.w3-round(onclick='save(' + "\"gallery\"" + ',' + picture.id + ')') save configuratiron
+                    br
+                    br
+                    button.w3-btn.w3-green.w3-round(onclick='save(' + "\"gallery\"" + ',' + picture.id + ')') Save changes
+                    button.w3-btn.w3-green.w3-round.w3-margin-left(onclick='redirect(' + "\"gallery\"" + ')') Cancel
 
-        div.w3-half.w3-blue-grey.w3-container(style="height:700px")
+        div.w3-half.w3-blue-grey.w3-container(style="height:800px")
             div.w3-padding.w3-center
                 h1= picture.name
-                img.w3-margin(src=picture.url, style="width:50%; height:50%")
+                img.w3-margin(src=picture.url, style="width:85%; height:85%")
                 div.w3-left-align.w3-padding-large
                     p= picture.description
 
