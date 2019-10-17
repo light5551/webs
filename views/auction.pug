@@ -1,0 +1,31 @@
+extends layout
+
+block content
+
+    div.w3-center
+        div.w3-center.w3-padding-16.w3-xlarge
+            h1 AUCTION
+            table
+                tr(class='lib_manager')
+                    th(class="td_man")
+                        input(type='button', value='Настройки аукциона', class='man_button', id='add_btn', onclick="redirect(" + "\"options\"" + ")")
+                    th(class="td_man")
+                        input(type='button', value='Настройки участников', class='man_button', id='members_btn', onclick="redirect(" + "\"members\"" + ")")
+
+        br
+        div.w3-main.w3-center.scroll_gallery
+            div.w3-card-2.w3-margin-right.w3-left.leftbox Сообщения
+            div.w3-card-2.w3-margin-right.w3-left.leftbox Участники
+            div.w3-card-2.w3-padding-16.w3-center(style="height:100%; display: inline-block")
+                div.w3-display-container(id='pictures' style="width: 960px; height: 540px")
+                    each picture in pictures
+                        if picture.involved
+                            div.slide
+                                a(href='picture/'+picture.id)
+                                    img(src=picture.url style="width: 960px; height: 540px")
+                    button.w3-button.w3-display-left.w3-black(onclick="plusDivs(-1)") &#10094;
+                    button.w3-button.w3-display-right.w3-black(onclick="plusDivs(1)") &#10095;
+
+
+    script
+        include ../public/javascripts/slider.js

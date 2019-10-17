@@ -11,8 +11,8 @@ var https = require('https');
 var fs = require('fs');
 
 var options = {
-  key: fs.readFileSync('../storage/domain.key'),
-  cert: fs.readFileSync('../storage/domain.crt'),
+  key: fs.readFileSync(__dirname + '/../storage/private.key'),
+  cert: fs.readFileSync(__dirname + '/../storage/domain.crt'),
   passphrase: 'kiskapolnayapeska'
 };
 
