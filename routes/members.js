@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
+const io = require('socket.io').listen(3030);
 let increase_rate = 500;
 
 /* GET home page. */

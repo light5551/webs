@@ -16,8 +16,12 @@ block content
 
         br
         div.w3-main.w3-center.scroll_gallery
-            div.w3-card-2.w3-margin-right.w3-left.leftbox Сообщения
-            div.w3-card-2.w3-margin-right.w3-left.leftbox Участники
+            div.w3-card-2.w3-margin-right.w3-left.leftbox.w3-padding-16(id="news_tab") Сообщения
+            div.w3-card-2.w3-margin-right.w3-left.leftbox.w3-padding-16 Участники
+                each mem in members
+                    div.w3-card.w3-margin.w3-hover-grey
+                        p=mem.name
+
             div.w3-card-2.w3-padding-16.w3-center(style="height:100%; display: inline-block")
                 div.w3-display-container(id='pictures' style="width: 960px; height: 540px")
                     each picture in pictures
@@ -32,3 +36,4 @@ block content
 
     script
         include ../public/javascripts/slider.js
+        include ../public/javascripts/auction_log.js
