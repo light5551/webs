@@ -8,6 +8,8 @@ block content
             table
                 tr(class='lib_manager')
                     th(class="td_man")
+                        input(type='button', value='Галерея', class='man_button', id='gallery_btn', onclick="redirect(" + "\"gallery\"" + ")")
+                    th(class="td_man")
                         input(type='button', value='Настройки аукциона', class='man_button', id='add_btn', onclick="redirect(" + "\"options\"" + ")")
                     th(class="td_man")
                         input(type='button', value='Настройки участников', class='man_button', id='members_btn', onclick="redirect(" + "\"members\"" + ")")
@@ -23,6 +25,7 @@ block content
                             div.slide
                                 a(href='picture/'+picture.id)
                                     img(src=picture.url style="width: 960px; height: 540px")
+
                     button.w3-button.w3-display-left.w3-black(onclick="plusDivs(-1)") &#10094;
                     button.w3-button.w3-display-right.w3-black(onclick="plusDivs(1)") &#10095;
 
