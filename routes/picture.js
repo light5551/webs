@@ -7,23 +7,26 @@ router.get('/:id', function (req, res) {
     fs.readFile(__dirname + '/pictures.json', function (err, data) {
         data = JSON.parse(data);
         let pictureId = req.params.id;
-        console.log(req.params.id);
         var picture;
+        if (req.query.json !== '')
         for (let i = 0; i < data.length; i++)
         {
             if (data[i].id === pictureId)
                 picture = data[i];
         }
+        else
+            picture = data[pictureId];
         if (picture !== undefined)
-            res.render('picture', {picture: picture});
+            if (req.query.json !== '')
+                res.render('picture', {picture: picture});
+            else
+                res.send(picture);
         else
             res.send('No such picture');
     });
 });
 
 router.post('/:id', function (req, res) {
-    //console.log(req.body);
-
     fs.readFile(__dirname + '/pictures.json', function (err, data) {
         data = JSON.parse(data);
         for (let i = 0; i < data.length; i++)

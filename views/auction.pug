@@ -15,6 +15,8 @@ block content
                         input(type='button', value='Настройки участников', class='man_button', id='members_btn', onclick="redirect(" + "\"members\"" + ")")
 
         br
+
+
         div.w3-main.w3-center.scroll_gallery
             div.w3-card-2.w3-margin-right.w3-left.leftbox.w3-padding-16(id="news_tab") Сообщения
             div.w3-card-2.w3-margin-right.w3-left.leftbox.w3-padding-16 Участники
@@ -29,10 +31,9 @@ block content
                             div.slide
                                 a(href='picture/'+picture.id)
                                     img(src=picture.url style="width: 960px; height: 540px")
-
                     button.w3-button.w3-display-left.w3-black(onclick="plusDivs(-1)") &#10094;
                     button.w3-button.w3-display-right.w3-black(onclick="plusDivs(1)") &#10095;
-
+                div.w3-center(style="padding:10px" id="infoaboutpict")="Название: " +pictures[0].name + ", автор: " + pictures[0].author + " цена: " + pictures[0].start_price
 
     script
         include ../public/javascripts/slider.js

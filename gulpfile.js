@@ -20,6 +20,13 @@ gulp.task('default', (done) => {
             presets: ['@babel/env']
         }))
         .pipe(gulp.dest('public/dist_javascript'));
+
+    gulp.src('public/javascripts/some_jquery_ui.js')
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(gulp.dest('public/dist_javascript'));
+
     gulp.src('public/stylesheets/style.less')
         .pipe(less( {
             paths: [ path.join(__dirname, 'less', 'includes') ]

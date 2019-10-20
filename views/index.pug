@@ -11,6 +11,13 @@ block content
 
         br
 
+        //fieldset
+            label(for="menupictures") Select a speed
+            select(name="speed" id="menupictures")
+            option Slower
+            option Slow
+
+
         div.w3-main.w3-content.w3-padding(style="max-width:1250px")
             div.w3-row-padding.w3-padding.w3-center(id='pictures')
                 each picture in pictures
