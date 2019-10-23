@@ -13,16 +13,16 @@ block content
                         input(type='button', value='Настройки аукциона', class='man_button', id='add_btn', onclick="redirect(" + "\"options\"" + ")")
                     th(class="td_man")
                         input(type='button', value='Настройки участников', class='man_button', id='members_btn', onclick="redirect(" + "\"members\"" + ")")
-
+                    th(class="td_man")
+                        input(type='button', value='Продать', class='man_button', id='sale', onclick="sale()")
         br
-
 
         div.w3-main.w3-center.scroll_gallery
             div.w3-card-2.w3-margin-right.w3-left.leftbox.w3-padding-16(id="news_tab") Сообщения
             div.w3-card-2.w3-margin-right.w3-left.leftbox.w3-padding-16 Участники
                 each mem in members
                     div.w3-card.w3-margin.w3-hover-grey
-                        p=mem.name
+                        button.w3-btn(value=mem.name onclick="goto(\"" + mem.name + "\")" border=0)=mem.name
 
             div.w3-card-2.w3-padding-16.w3-center(style="height:100%; display: inline-block")
                 div.w3-display-container(id='pictures' style="width: 960px; height: 540px")
@@ -35,6 +35,9 @@ block content
                     button.w3-button.w3-display-right.w3-black(onclick="plusDivs(1)") &#10095;
                 div.w3-center(style="padding:10px" id="infoaboutpict")="Название: " +pictures[0].name + ", автор: " + pictures[0].author + " цена: " + pictures[0].start_price
 
+    <script src="/socket.io/socket.io.js"></script>
     script
+        include ../public/javascripts/jquery.min.js
         include ../public/javascripts/slider.js
         include ../public/javascripts/auction_log.js
+        include ../public/javascripts/goto.js

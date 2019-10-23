@@ -29,6 +29,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 var sec_server = https.createServer(options, app).listen(4433);
+var io = require('socket.io').listen(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -99,3 +100,24 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+let _socket;
+connections = [];
+io.sockets.on('connection', function(socket) {
+  _socket = socket
+  console.log("Успешное соединение");
+  connections.push(socket);
+
+  socket.on('disconnect', function (data) {
+    connections.splice(connections.indexOf(socket), 1);
+    console.log("Отключились");
+  });
+
+  socket.on('send mess', function (data) {
+    if(data.mess == -1)
+      data.mess = 'ALL IN'
+    io.sockets.emit('add mess', {mess: data.mess, owner: data.owner.split("%")[0], className: data.className});
+  });
+});
+
+module.exports = io

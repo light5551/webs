@@ -9,8 +9,11 @@ var pictureRouter = require('./routes/picture');
 var membersRouter = require('./routes/members');
 var optionsRouter = require('./routes/options');
 var auctionRouter = require('./routes/auction');
+var personRouter= require('./routes/person');
 
 var app = express();
+//var server = require('http').createServer(app);
+
 
 
 // view engine setup
@@ -28,6 +31,8 @@ app.use('/picture', pictureRouter);
 app.use('/members', membersRouter);
 app.use('/options', optionsRouter);
 app.use('/auction', auctionRouter);
+app.use('/person', personRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
