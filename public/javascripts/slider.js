@@ -7,8 +7,8 @@ function plusDivs(n) {
 }
 
 function showDivs(n) {
-    var i;
-    var x = document.getElementsByClassName("slide");
+    let i;
+    let x = document.getElementsByClassName("slide");
     if (n > x.length) {
         slideIndex = 1;
     }
@@ -20,7 +20,7 @@ function showDivs(n) {
 }
 
 function updateInfo(){
-callAjaxGet(slideIndex - 1, changeInfo);
+    callAjaxGet(slideIndex - 1, changeInfo);
 }
 
 function callAjaxGet(id, callback) {
@@ -39,6 +39,15 @@ function callAjaxGet(id, callback) {
 function changeInfo(json) {
     let myJson = JSON.parse(json);
     let info =  document.getElementById('infoaboutpict');
+    let sold = document.getElementById('sold_check');
+    console.log("LOG:" + myJson.sold);
+    if (myJson.sold !== false)
+    {
+        sold.innerText="Продано";
+        sold.title=myJson.sold;
+    } else {
+        sold.innerText="";
+    }
     info.innerText = "Название: " + myJson.name + ", автор: " + myJson.author + " цена: " + myJson.start_price
 
 }

@@ -3,6 +3,8 @@ html
     head
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css")
+        style
+            include ../public/stylesheets/w3.css
 
     body
         .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
@@ -13,6 +15,12 @@ html
             .row
                 .col-6
                     img.img-thumbnail#picture(src=picture)
+                    hr
+                    div.w3-card-2.w3-center.w3-text-black.sold="Ставка на торгах: " + "-" + " $"
+                    br
+                    div.w3-card-2.w3-center.w3-text-black.sold="Наша ставка: " + "-" +" $"
+                    br
+                    div.w3-card-2.w3-center.w3-text-black.sold="Запас денег: " + cash + " $"
                     hr
                     form#messForm
                         .row

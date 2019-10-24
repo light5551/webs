@@ -80,3 +80,19 @@ function editMember(id, command) {
     }
   });
 }
+
+function soldReq(id, member) {
+  return new Promise(function (resolve, reject){
+    let result = `id=${id}`;
+    result += `&mem=${member}`;
+    $.ajax({
+      url: "/picture/sell",
+      type: "POST",
+      crossDomain: true,
+      data: result,
+      success: function(json, status) {
+        resolve("ok")
+      },
+    })
+  })
+}

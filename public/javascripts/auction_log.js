@@ -1,8 +1,3 @@
-let promise = new Promise(function(resolve, reject) {
-    // эта функция выполнится автоматически, при вызове new Promise
-    setTimeout(() => resolve("done"), 2000);
-});
-
 let socket;
 $(function() {
     socket = io.connect();
@@ -13,6 +8,12 @@ $(function() {
 
 });
 
-function sale() {
-
+function sale()
+{
+    // need to remove hardcoded member to member, that suggests the bet price
+    let res = soldReq(slideIndex-1, "popa")
+    res.then(function() {        let msg = {mess:"dw" ,owner: "LazyBOT", className: "success"};
+            socket.emit('send mess', msg);
+            console.log("picture sold");
+            updateInfo(); })
 }

@@ -3,17 +3,18 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
+
 router.get('/:id', function (req, res) {
     fs.readFile(__dirname + '/pictures.json', function (err, data) {
         data = JSON.parse(data);
         let pictureId = req.params.id;
         var picture;
         if (req.query.json !== '')
-        for (let i = 0; i < data.length; i++)
-        {
-            if (data[i].id === pictureId)
-                picture = data[i];
-        }
+            for (let i = 0; i < data.length; i++)
+            {
+                if (data[i].id === pictureId)
+                    picture = data[i];
+            }
         else
             picture = data[pictureId];
         if (picture !== undefined)
@@ -24,6 +25,23 @@ router.get('/:id', function (req, res) {
         else
             res.send('No such picture');
     });
+});
+
+router.post('/sell', function (req, res) {
+    fs.readFile(__dirname + '/pictures.json', function (err, data) {
+        data = JSON.parse(data);
+        let i = req.body.id;
+        data[i].sold = "Картина \"" + data[i].name + "\" продана участнику " + req.body.mem + "!";
+        console.log(data);
+        fs.writeFile(__dirname+'/pictures.json', JSON.stringify(data), function (err) {
+            if (err)
+                console.log(err );
+            else
+                console.log('success')
+        });
+
+    });
+    res.send('ok');
 });
 
 router.post('/:id', function (req, res) {

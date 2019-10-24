@@ -5,13 +5,13 @@ html
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href="/stylesheets/w3.css")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Karma")
+        script
+            include ../public/javascripts/jquery.min.js
+            include ../public/javascripts/some_jquery_ui.js
+            include ../public/dist_javascript/save.js
+            include ../public/javascripts/jquery-ui.min.js
         style
             include ../public/stylesheets/jquery-ui.min.css
 
     body
         block content
-        script
-            include ../public/javascripts/jquery.min.js
-            include ../public/dist_javascript/save.js
-            include ../public/javascripts/jquery-ui.min.js
-            include ../public/javascripts/some_jquery_ui.js
