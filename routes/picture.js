@@ -35,11 +35,14 @@ router.post('/sell', function (req, res) {
             console.log(err)
             return
         }
-        console.log(data)
         data = JSON.parse(data);
-        let i = req.body.id;
+        let i = req.body.id - 1;
+        console.log("OFFSET: " + i)
+        if(data[i] === null)
+        {
+            res.end();
+        }
         data[i].sold = "Картина \"" + data[i].name + "\" продана участнику " + req.body.mem + "!";
-        console.log(data);
         fs.writeFile(__dirname+'/pictures.json', JSON.stringify(data), function (err) {
             if (err)
                 console.log(err );
@@ -48,7 +51,7 @@ router.post('/sell', function (req, res) {
         });
 
     });
-    res.send('ok');
+    res.end();
 });
 
 router.post('/:id', function (req, res) {

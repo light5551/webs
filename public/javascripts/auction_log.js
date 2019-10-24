@@ -8,10 +8,12 @@ $(function() {
 
 });
 
-function sale()
+function sale(offset)
 {
     // need to remove hardcoded member to member, that suggests the bet price
-    let res = soldReq(slideIndex-1, getWinner())
+    if(getWinner() === "-")
+        return
+    let res = soldReq(offset, getWinner())
     res.then(function() {        let msg = {mess:"sold to " + getWinner() ,owner: "LazyBOT", className: "success"};
             socket.emit('send mess', msg);
             console.log("picture sold");

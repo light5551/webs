@@ -1,1 +1,17 @@
-[{"id":"956","name":"glazunov sergey alekseevich","money":8000},{"id":"997","name":"gosudarkin yaroslav sergeevich","money":2500},{"id":"946","name":"tokarev andrey petrovich","money":4000}]
+[
+  {
+    "id": "956",
+    "name": "glazunov sergey alekseevich",
+    "money": 8000
+  },
+  {
+    "id": "997",
+    "name": "gosudarkin yaroslav sergeevich",
+    "money": 2500
+  },
+  {
+    "id": "946",
+    "name": "tokarev andrey petrovich",
+    "money": 4000
+  }
+]

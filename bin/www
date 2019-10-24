@@ -52,8 +52,7 @@ function normalizePort(val) {
         // named pipe
         return val;
     }
-
-    if (port >= 0) {
+    if(port >= 0) {
         // port number
         return port;
     }
@@ -145,11 +144,10 @@ function auction() {
             for (let i = 0, p = Promise.resolve(); i < pictures.length; i++) {
                 p = p.then(_ => new Promise(resolve =>
                     setTimeout(function () {
-
                         update(pictures[i].url, pictures[i].name, smallTimeOut);
                         if (i === pictures.length - 1)
-                            io.sockets.emit('add mess', {mess: "Окончание аукциона!", owner: "Admin",
-                                className: "danger"})
+                            setTimeout(function () {io.sockets.emit('add mess', {mess: "Окончание аукциона!", owner: "Admin",
+                                className: "danger"}); update(pictures[i].url, pictures[i].name,smallTimeOut) }, smallTimeOut)
                         resolve();
                     },  smallTimeOut)
                 ));

@@ -1,6 +1,6 @@
 var min = 1;
 var max = 6;
-var random = Math.floor(Math.random() * (max - min)) + min;
+var random = 5
 
 var alertClass;
 switch (random) {
@@ -24,9 +24,11 @@ switch (random) {
         break;
 }
 
+let winner = "-"
 let _socket;
 wasPicture = false
 let wasTime = false;
+let offset = 0;
 $(function() {
     _socket = io.connect();
     var $form = $("#messForm"); // Форму сообщений
@@ -49,16 +51,31 @@ $(function() {
     });
 
     _socket.on('change picture', function (data) {
-        if (wasPicture)
-        sale()
+        if (wasPicture && document.getElementById('welcome').innerText.split(', ')[1] === getWinner())
+        {
+            sale(offset)
+            console.log("sale CALLING! Winner: " + getWinner())
+        }
+        offset++;
         wasPicture = true
         $('#picture').attr("src",data.src);
+        if( winner !== "-" )
+        {
+            let c = parseInt(document.getElementById('cash').innerText.split(' ')[2]);
+            document.getElementById('cash').innerText = "Запас денег: " +
+                (c - parseInt(document.getElementById("your_rate").innerText.split(" ")[2])) + " $";
+        }
+        document.getElementById('rate').innerText = "Ставка на торгах: " + 0 + " $"
+        document.getElementById('your_rate').innerText = "Наша ставка: " + 0 +" $"
     })
 
     _socket.on("change_total", (data) => {
         console.log('AAAAAAAAAA ' + data.value)
         document.getElementById('rate').innerText = "Ставка на торгах: " + data.value + " $"
-        //sale(data.winner)
+        if (data.value !== parseInt(document.getElementById("your_rate").innerText.split(" ")[2]))
+        {
+            winner = "-"
+        }
     })
 });
 
@@ -75,7 +92,6 @@ function updateTime(time) {
         },1000);
 }
 
-let winner = "-"
 let yourrate=0
 function send(msg) {
     _socket.emit('send mess', msg);
