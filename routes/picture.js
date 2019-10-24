@@ -29,6 +29,13 @@ router.get('/:id', function (req, res) {
 
 router.post('/sell', function (req, res) {
     fs.readFile(__dirname + '/pictures.json', function (err, data) {
+        console.log(err)
+        if (err)
+        {
+            console.log(err)
+            return
+        }
+        console.log(data)
         data = JSON.parse(data);
         let i = req.body.id;
         data[i].sold = "Картина \"" + data[i].name + "\" продана участнику " + req.body.mem + "!";

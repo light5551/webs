@@ -11,9 +11,11 @@ $(function() {
 function sale()
 {
     // need to remove hardcoded member to member, that suggests the bet price
-    let res = soldReq(slideIndex-1, "popa")
-    res.then(function() {        let msg = {mess:"dw" ,owner: "LazyBOT", className: "success"};
+    let res = soldReq(slideIndex-1, getWinner())
+    res.then(function() {        let msg = {mess:"sold to " + getWinner() ,owner: "LazyBOT", className: "success"};
             socket.emit('send mess', msg);
             console.log("picture sold");
-            updateInfo(); })
+            //updateInfo();
+         })
 }
+

@@ -11,6 +11,8 @@ block content
             table
                 tr(class='lib_manager')
                     th(class="td_man")
+                        input(type='button', value='Начать аукцион', class='man_button', id='start_auction', onclick="start()")
+                    th(class="td_man")
                         input(type='button', value='Галерея', class='man_button', id='gallery_btn', onclick="redirect(" + "\"gallery\"" + ")")
                     th(class="td_man")
                         input(type='button', value='Настройки аукциона', class='man_button', id='add_btn', onclick="redirect(" + "\"options\"" + ")")

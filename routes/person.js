@@ -9,9 +9,6 @@ console.log(req.query.name);
 res.render('personinpart', {name: req.query.name, cash: req.query.cash, picture: "https://sun9-9.userapi.com/c604331/v604331269/3b5d2/e2JCAswJxk8.jpg"});
 });
 
-function changePicture(srcOfPicture){
-    io.sockets.emit('change picture', {src: srcOfPicture})
-}
 
 
 module.exports = router;

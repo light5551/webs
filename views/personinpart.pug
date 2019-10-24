@@ -9,18 +9,19 @@ html
     body
         .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
             h5.my-0.mr-md-auto Auction
+            h2.align-left#clock 0
         .container
             .py-5.text-center
-                h2 Добро пожаловать, #{name}
+                h2#welcome Добро пожаловать, #{name}
             .row
                 .col-6
                     img.img-thumbnail#picture(src=picture)
                     hr
-                    div.w3-card-2.w3-center.w3-text-black.sold="Ставка на торгах: " + "-" + " $"
+                    div.w3-card-2.w3-center.w3-text-black.sold#rate="Ставка на торгах: " + "0" + " $"
                     br
-                    div.w3-card-2.w3-center.w3-text-black.sold="Наша ставка: " + "-" +" $"
+                    div.w3-card-2.w3-center.w3-text-black.sold#your_rate="Наша ставка: " + "0" +" $"
                     br
-                    div.w3-card-2.w3-center.w3-text-black.sold="Запас денег: " + cash + " $"
+                    div.w3-card-2.w3-center.w3-text-black.sold#cash="Запас денег: " + cash + " $"
                     hr
                     form#messForm
                         .row
@@ -36,6 +37,9 @@ html
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         script
+            include ../public/javascripts/slider.js
+            include ../public/javascripts/save.js
+            include ../public/javascripts/auction_log.js
             include ../public/javascripts/sockets.js
 
 

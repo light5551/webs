@@ -11,16 +11,16 @@ var https = require('https');
 var fs = require('fs');
 
 var options = {
-  key: fs.readFileSync(__dirname + '/../storage/private.key'),
-  cert: fs.readFileSync(__dirname + '/../storage/domain.crt'),
-  passphrase: 'kiskapolnayapeska'
+    key: fs.readFileSync(__dirname + '/../storage/private.key'),
+    cert: fs.readFileSync(__dirname + '/../storage/domain.crt'),
+    passphrase: 'kiskapolnayapeska'
 };
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000' );
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
@@ -46,19 +46,19 @@ sec_server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+    var port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+    if (port >= 0) {
+        // port number
+        return port;
+    }
 
-  return false;
+    return false;
 }
 
 /**
@@ -66,27 +66,27 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+    var bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
 }
 
 /**
@@ -94,30 +94,93 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+    debug('Listening on ' + bind);
 }
 
 let _socket;
 connections = [];
-io.sockets.on('connection', function(socket) {
-  _socket = socket
-  console.log("Успешное соединение");
-  connections.push(socket);
+io.sockets.on('connection', function (socket) {
+    _socket = socket
+    console.log("Успешное соединение");
+    connections.push(socket);
 
-  socket.on('disconnect', function (data) {
-    connections.splice(connections.indexOf(socket), 1);
-    console.log("Отключились");
-  });
+    socket.on('disconnect', function (data) {
+        connections.splice(connections.indexOf(socket), 1);
+        console.log("Отключились");
+    });
 
-  socket.on('send mess', function (data) {
-    if(data.mess == -1)
-      data.mess = 'ALL IN'
-    io.sockets.emit('add mess', {mess: data.mess, owner: data.owner.split("%")[0], className: data.className});
-  });
+    socket.on('send mess', function (data) {
+        if (data.mess == -1)
+            data.mess = 'ALL IN'
+        io.sockets.emit('add mess', {mess: data.mess, owner: data.owner.split("%")[0], className: data.className});
+    });
+
+    socket.on('start', (data) => {
+        console.log('START');
+        auction()
+    })
+
+    socket.on('change total', (data) => {
+        io.sockets.emit('change_total', {value: data.value, winner: data.winner})
+    })
 });
 
-module.exports = io
+function auction() {
+    let pictures;
+    let options;
+
+    fs.readFile(__dirname + '/../storage/options.json', function (err, data) {
+        options = JSON.parse(data)
+        let timeOut = parseInt(options.sellTimeout)
+        let smallTimeOut = timeOut
+
+        fs.readFile(__dirname + '/../routes/pictures.json', function (err, data) {
+            pictures = JSON.parse(data)
+            let lastPicture
+
+            for (let i = 0, p = Promise.resolve(); i < pictures.length; i++) {
+                p = p.then(_ => new Promise(resolve =>
+                    setTimeout(function () {
+
+                        update(pictures[i].url, pictures[i].name, smallTimeOut);
+                        if (i === pictures.length - 1)
+                            io.sockets.emit('add mess', {mess: "Окончание аукциона!", owner: "Admin",
+                                className: "danger"})
+                        resolve();
+                    },  smallTimeOut)
+                ));
+            }
+        });
+    });
+
+
+}
+
+function next(src, name, time, smallTime) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            update(src, name, smallTime);
+            resolve("ok")
+        }, time, "ok")
+    })
+}
+
+function update(src, name, time=0) {
+    changePicture(src);
+    send(name, time)
+}
+
+function send(name, time=3000, type="success") {
+    io.sockets.emit('add mess', {mess: "Переход к следующей картине. Картина - " + name, owner: "Admin",
+        className: type, time: "" + (time/1000)})
+}
+
+function changePicture(srcOfPicture) {
+    io.sockets.emit('change picture', {src: srcOfPicture})
+}
+
+module.exports = io;
