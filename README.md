@@ -1,6 +1,10 @@
-# Untitled4
+## Routes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.14.
+Акции: **localhost:4201/securities/\<command\>**. POST commands: add/del/edit
+
+Брокеры: **localhost:4201/members/\<command\>**. POST commands: add/del/edit
+
+Настройки: **localhost:4201/options/edit**
 
 ## Development server
 
