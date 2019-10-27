@@ -1,5 +1,6 @@
 import * as memRouter from './routers/members';
 import * as optionsRouter from './routers/options';
+import * as secursRouter from './routers/securities';
 import InitHelper from './init_helper';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 
 memRouter.register(app);
 optionsRouter.register(app);
+secursRouter.register(app);
 
 app.listen(port, host, () => {
   console.log('Server started');
