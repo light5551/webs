@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "serve": "concurrently \"ng serve\" \"server/node_modules/.bin/ts-node-dev --project ./server server/server.ts\""
+    "prod": "ng serve && cd ./server && yarn prod",
+    "serve": "concurrently \"ng serve\" \"yarn --cwd ./server prod\""
   },
   "private": true,
   "dependencies": {
