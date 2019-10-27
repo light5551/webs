@@ -40,13 +40,16 @@ $(function() {
         event.preventDefault();
     });
     _socket.on('add mess', function(data) {
-        if (!wasTime)
+        if (!wasTime && parseInt(data.time))
         {
+            console.log("parse: " + parseInt(data.time) + " str: " + data.time)
             updateTime(parseInt(data.time))
             wasTime = true
         }
         else
-            tmp = parseInt(data.time)
+            if(parseInt(data.time))
+                tmp = parseInt(data.time)
+
         $all_messages.append("<div class='alert alert-" + data.className + "'><b>" +data.owner + "</b>: " + data.mess + "</div>");
     });
 
@@ -61,9 +64,9 @@ $(function() {
         $('#picture').attr("src",data.src);
         if( winner !== "-" )
         {
-            let c = parseInt(document.getElementById('cash').innerText.split(' ')[2]);
+            let cd = parseInt(document.getElementById('cash').innerText.split(' ')[2]);
             document.getElementById('cash').innerText = "Запас денег: " +
-                (c - parseInt(document.getElementById("your_rate").innerText.split(" ")[2])) + " $";
+                (cd - parseInt(document.getElementById("your_rate").innerText.split(" ")[2])) + " $";
         }
         document.getElementById('rate').innerText = "Ставка на торгах: " + 0 + " $"
         document.getElementById('your_rate').innerText = "Наша ставка: " + 0 +" $"

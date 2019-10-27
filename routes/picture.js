@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-
+const mocha = require('mocha')
 
 router.get('/:id', function (req, res) {
     fs.readFile(__dirname + '/pictures.json', function (err, data) {

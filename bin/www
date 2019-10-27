@@ -115,6 +115,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('send mess', function (data) {
         if (data.mess == -1)
             data.mess = 'ALL IN'
+
         io.sockets.emit('add mess', {mess: data.mess, owner: data.owner.split("%")[0], className: data.className});
     });
 
