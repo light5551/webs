@@ -8,6 +8,7 @@ export const register = ( app: express.Application ) => {
     router.post('/add', (req: express.Request, res: express.Response) => {
         fs.readFile(__dirname + '/../storage/members.json', (err, data) => {
             const jsonData = JSON.parse(data.toString());
+            // tslint:disable-next-line:prefer-for-of
             for (let i = 0; i < jsonData.length; i++) {
                 if (req.body.id === jsonData[i].id) {
                     return;
@@ -31,6 +32,21 @@ export const register = ( app: express.Application ) => {
             for (let i = 0; i < jsonData.length; i++) {
                 if (req.body.id === jsonData[i].id) {
                     jsonData.splice(i, 1);
+                    break;
+                }
+            }
+            FSHelper.saveToFile(__dirname + '/../storage/members.json', JSON.stringify(jsonData));
+        });
+        res.send('ok');
+    });
+
+    router.post('/edit', (req: express.Request, res: express.Response) => {
+        fs.readFile(__dirname + '/../storage/members.json', (err, data) => {
+            const jsonData = JSON.parse(data.toString());
+            // tslint:disable-next-line:prefer-for-of
+            for (let i = 0; i < jsonData.length; i++) {
+                if (req.body.id === jsonData[i].id) {
+                    jsonData[i].money = parseInt(jsonData[i].money, 10) + parseInt(req.body.money, 10);
                     break;
                 }
             }
