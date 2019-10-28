@@ -1,0 +1,23 @@
+<div *ngIf="!loading">
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">company</th>
+      <th scope="col">number</th>
+      <th scope="col">distribution</th>
+      <th scope="col">start price</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let stock of stocksService.stocks">
+    <tr>
+      <th>{{stock.id}}</th>
+      <td>{{stock.company}}</td>
+      <td>{{stock.number}}</td>
+      <td>{{stock.distribution}}</td>
+      <td>{{stock.start_price}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<p *ngIf="loading"></p>
