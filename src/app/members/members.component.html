@@ -1,3 +1,23 @@
-<div class="content">
-    <h1>{{title}}</h1>
+<div *ngIf="!loading">
+    <table class="table h6" >
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Legal name</th>
+            <th scope="col">Money</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let member of service.members">
+        <tr>
+            <th class="pb-4 pt-4">{{member.id}}</th>
+            <td class="pt-4 pb-4">{{member.name}}</td>
+            <td class="pt-4 pb-4">{{member.money}}</td>
+            <td><a class="btn btn-outline-info m-1" href="/">+ 1000$</a></td>
+            <td><a class="btn btn-outline-info m-1" (click)="delMember(member.id)">Remove</a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+<p *ngIf="loading"></p>

@@ -1,21 +1,25 @@
 <div *ngIf="!loading">
-  <table class="table" >
+  <table class="table h6" >
     <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">company</th>
-      <th scope="col">number</th>
-      <th scope="col">distribution</th>
-      <th scope="col">start price</th>
+      <th scope="col">Company</th>
+      <th scope="col">Stocks count</th>
+      <th scope="col">Distribution</th>
+      <th scope="col">Start stock price</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody *ngFor="let stock of stocksService.stocks">
     <tr>
-      <th>{{stock.id}}</th>
-      <td>{{stock.company}}</td>
-      <td>{{stock.number}}</td>
-      <td>{{stock.distribution}}</td>
-      <td>{{stock.start_price}}</td>
+      <th class="pt-4 pb-4">{{stock.id}}</th>
+      <td class="pt-4 pb-4">{{stock.company}}</td>
+      <td class="pt-4 pb-4" >{{stock.number}}</td>
+      <td class="pt-4 pb-4">{{stock.distribution}}</td>
+      <td class="pt-4 pb-4">{{stock.start_price}}</td>
+      <td><a class="btn btn-outline-info m-1" href="/">Edit</a></td>
+      <td><a class="btn btn-outline-info m-1" href="/">Remove</a></td>
     </tr>
     </tbody>
   </table>

@@ -13,7 +13,13 @@ export default class FSHelper {
         }
 
         if (!fs.existsSync(__dirname + '/storage/members.json')) {
-            fs.appendFileSync(__dirname + '/storage/members.json', '[ ]');
+            fs.appendFileSync(__dirname + '/storage/members.json', '[ ' +
+                '{"id":1, "name": "Государкин Ярослав", "money": 15000}, ' +
+                '{"id":2, "name": "Ленивец Сид", "money": 100000}, ' +
+                '{"id":3, "name": "Билли Бонс", "money": 2000000}, ' +
+                '{"id":4, "name": "Борис Бритва", "money": 53000000}, ' +
+                '{"id":5, "name": "Пещера Чудес", "money": 10000000000} ' +
+                ']');
         }
 
         if (!fs.existsSync(__dirname + '/storage/options.json')) {
@@ -24,7 +30,9 @@ export default class FSHelper {
         if (!fs.existsSync(__dirname + '/storage/securities.json')) {
             fs.appendFileSync(__dirname + '/storage/securities.json', '[ {"id":1,"company":"Gazpromchik","number":1500,"distribution":"normal","start_price":4000},' +
                 '{"id":2,"company":"Uruandex","number":8300,"distribution":"puasson","start_price":2000},' +
-                '{"id":3,"company":"Ust-Tech","number":2500,"distribution":"normal","start_price":2600}]');
+                '{"id":3,"company":"OOO Sinyak","number":4760,"distribution":"normal","start_price":1700},' +
+                '{"id":4,"company":"Gazmyas","number":1300,"distribution":"puasson","start_price":4000},' +
+                '{"id":5,"company":"Ust-Tech","number":2500,"distribution":"normal","start_price":2600}]');
         }
     }
 

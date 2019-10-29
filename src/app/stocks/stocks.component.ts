@@ -14,7 +14,6 @@ export class StocksComponent implements OnInit {
   private loading = true;
 
   ngOnInit() {
-    // TODO: Сделать Cors
      this.stocksService.fetchStocks()
       .pipe(delay(5))
       .subscribe(() => {

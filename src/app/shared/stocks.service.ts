@@ -9,7 +9,6 @@ export interface Stock {
   number: number;
   distribution: string;
   start_price: number;
-
 }
 
 @Injectable({providedIn: 'root'})
@@ -17,13 +16,11 @@ export class StocksService {
 
   constructor(private http: HttpClient) {}
 
-  public stocks: Stock[] = [
-    {id: 1, company: 'fc', number: 23, distribution: 'dis', start_price: 5},
-    {id: 2, company: 'sc', number: 32, distribution: 'dis2', start_price: 15}
-  ];
+  public stocks: Stock[] = [];
 
   fetchStocks(): Observable<Stock[]> {
     return this.http.get<Stock[]>('http://localhost:4201/securities/')
       .pipe(tap((stocks) => this.stocks = stocks));
   }
+
 }
