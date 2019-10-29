@@ -1,11 +1,17 @@
 import * as express from 'express';
 import * as fs from 'fs';
 import FSHelper from '../fs_helper';
+import {json} from "express";
 
 export const register = ( app: express.Application ) => {
     const router = express.Router();
     const storage = __dirname + '/../storage/securities.json';
 
+    router.get('/', (req: express.Request, res: express.Response) =>  {
+        fs.readFile(storage, (err, data) => {
+            res.send(data.toString());
+        });
+    });
     router.post('/add', (req: express.Request, res: express.Response) => {
         fs.readFile(storage, (err, data) => {
             const jsonData = JSON.parse(data.toString());

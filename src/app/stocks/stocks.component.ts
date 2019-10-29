@@ -15,11 +15,11 @@ export class StocksComponent implements OnInit {
 
   ngOnInit() {
     // TODO: Сделать Cors
-    // this.stocksService.fetchStocks()
-    //  .pipe(delay(500))
-    //  .subscribe(() => {
+     this.stocksService.fetchStocks()
+      .pipe(delay(5))
+      .subscribe(() => {
         this.loading = false;
-   // });
+    });
   }
 
 }
