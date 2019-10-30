@@ -12,7 +12,10 @@ export class ModalsComponent implements OnInit {
   constructor(private modalService: ModalService) { }
 
   ngOnInit() {
-    console.log('11');
+  }
+
+  private addMember() {
+
   }
 
 }

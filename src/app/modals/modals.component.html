@@ -9,12 +9,20 @@
       </div>
       <div class="modal-body">
         <div *ngFor="let j of i.fields">
-          <p>{{j.id}}</p>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">{{j.labelText}}</span>
+            </div>
+            <input type="text" id="{{j.id}}" class="form-control" placeholder="Введите новое значение">
+          </div>
+
+
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="i.fun()">Save changes</button>
       </div>
     </div>
   </div>
