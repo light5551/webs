@@ -6,13 +6,15 @@ import { MembersComponent } from './members/members.component';
 import { StocksComponent } from './stocks/stocks.component';
 import { MHeaderComponent } from './m-header/m-header.component';
 import {HttpClientModule} from '@angular/common/http';
+import { ModalsComponent } from './modals/modals.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MembersComponent,
     StocksComponent,
-    MHeaderComponent
+    MHeaderComponent,
+    ModalsComponent
   ],
   imports: [
     BrowserModule,
