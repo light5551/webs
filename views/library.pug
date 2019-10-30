@@ -65,6 +65,8 @@ html
                     th(class='td_h') Название
                     th(class='td_h') Номер
                     th(class='td_h') В наличии
+                    th(class='td_h') Год
+                    th(class='td_h') Автор
                     th(class='td_h') Дата Выдачи
                     th(class='td_h') Владелец
 
@@ -76,6 +78,8 @@ html
                         th= "+"
                     else
                         th= "-"
+                    th= book.creation_date
+                    th= book.author
                     th= book.return_data
                     th= book.owner
                     th(class="td_empty")
