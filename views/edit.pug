@@ -1,0 +1,20 @@
+doctype
+html
+    style
+        include ../style.css
+    body
+        div.center_div
+            h1 EDIT
+            p ID
+            input(disabled, id='_id', value=book.id)
+            p NAME
+            input(id='name', value=book.name)
+            p AUTHOR
+            input(id='author',value=book.author)
+            p YEAR
+            input(id='year', value=book.creation_date)
+
+            p
+            input(type='button', value='SUBMIT', onclick="submitBookData()")
+        script
+            include ../book_edit.js
