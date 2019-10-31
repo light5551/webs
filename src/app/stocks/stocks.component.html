@@ -15,11 +15,11 @@
     <tr>
       <th class="pt-4 pb-4">{{stock.id}}</th>
       <td class="pt-4 pb-4">{{stock.company}}</td>
-      <td class="pt-4 pb-4" >{{stock.number}}</td>
+      <td class="pt-4 pb-4">{{stock.number}}</td>
       <td class="pt-4 pb-4">{{stock.distribution}}</td>
       <td class="pt-4 pb-4">{{stock.start_price}}</td>
-      <td><a class="btn btn-outline-secondary m-1" href="/">Edit</a></td>
-      <td><a class="btn btn-outline-danger m-1" href="/">Remove</a></td>
+      <td><a class="btn btn-outline-secondary m-1" (click)="modalService.getId(stock.id)" data-toggle="modal" data-target="#Editor">Edit</a></td>
+      <td><a class="btn btn-outline-danger m-1">Remove</a></td>
     </tr>
     </tbody>
   </table>

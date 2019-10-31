@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StocksService} from '../shared/stocks.service';
 import {delay} from 'rxjs/operators';
+import {ModalService} from '../shared/modals.service';
 
 @Component({
   selector: 'app-stocks',
@@ -9,7 +10,7 @@ import {delay} from 'rxjs/operators';
 })
 export class StocksComponent implements OnInit {
 
-  constructor(private stocksService: StocksService) { }
+  constructor(private stocksService: StocksService, private modalService: ModalService) { }
 
   private loading = true;
 
