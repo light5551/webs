@@ -1,4 +1,4 @@
-<div *ngFor="let i of this.modalService.modals" class="modal fade" id="{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div *ngFor="let i of this.modalService.modals; let k=index" class="modal fade" id="{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,21 +8,21 @@
         </button>
       </div>
       <div class="modal-body">
-        <div *ngFor="let j of i.fields">
+        <div *ngFor="let j of i.fields; let idx=index">
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">{{j.labelText}}</span>
             </div>
-            <input type="text" id="{{j.id}}" class="form-control" placeholder="Введите новое значение">
+            <input *ngIf="services[k].f !== editStock" type="text" id="{{j.id}}" class="form-control" placeholder="Введите новое значение">
+            <input *ngIf="services[k].f === editStock" type="text" id="{{j.id}}_E" class="form-control" placeholder="Введите новое значение"
+                     [value]="getCurrentStock()[j.labelText]">
           </div>
-
-
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="i.fun()">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="services[k].f(services[k].service, i.fun())">Save changes</button>
       </div>
     </div>
   </div>

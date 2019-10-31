@@ -30,7 +30,7 @@ export class ModalService {
             labelText: 'money'
           }
         ],
-      fun: this.addMember
+      fun: this.getMember
     },
     {
       id: 'addStock', title: 'Add stock',
@@ -53,8 +53,7 @@ export class ModalService {
             labelText: 'start_price'
           }
         ],
-      fun: this.addStock
-
+      fun: this.getStock
     },
     {
       id: 'exchangeOptions', title: 'Exchange options',
@@ -62,11 +61,11 @@ export class ModalService {
         [
           {
             id: 'options_cost_update_delay',
-            labelText: 'cost update delay'
+            labelText: 'cost_update_delay'
           },
           {
             id: 'options_bidding_time_period',
-            labelText: 'bidding time period'
+            labelText: 'bidding_time_period'
           }
         ],
       fun: this.changeOptions
@@ -81,7 +80,7 @@ export class ModalService {
           },
           {
             id: 'editor_stock_count',
-            labelText: 'stock_count'
+            labelText: 'number'
           },
           {
             id: 'editor_stock_distribution',
@@ -96,36 +95,51 @@ export class ModalService {
     }
   ];
 
-  public addMember() {
-    const name = (document.getElementById('member_name') as HTMLInputElement).value;
-    const money = (document.getElementById('member_money') as HTMLInputElement).value;
-    console.log(name, money);
+  public getMember() {
+    const data = { id: 0,
+          name: (document.getElementById('member_name') as HTMLInputElement).value,
+          money: parseInt((document.getElementById('member_money') as HTMLInputElement).value, 10)
+    }
+    console.log(data);
+    return data;
   }
 
-  public addStock() {
-    const company = (document.getElementById('stock_company') as HTMLInputElement).value;
-    const count = (document.getElementById('stock_count') as HTMLInputElement).value;
-    const distribution = (document.getElementById('stock_distribution') as HTMLInputElement).value;
-    const startPrice = (document.getElementById('stock_start_price') as HTMLInputElement).value;
-    console.log(company, count, distribution, startPrice);
+  public getStock() {
+    const data = { id: 2,
+             company: (document.getElementById('stock_company') as HTMLInputElement).value,
+             number: parseInt((document.getElementById('stock_count') as HTMLInputElement).value, 10),
+             distribution: (document.getElementById('stock_distribution') as HTMLInputElement).value,
+             start_price: parseInt((document.getElementById('stock_start_price') as HTMLInputElement).value, 10)
+    };
+    console.log(data);
+    return data;
   }
 
   public changeOptions() {
-    const costUpdateDelay = (document.getElementById('options_cost_update_delay') as HTMLInputElement).value;
-    const biddingTimePeriod = (document.getElementById('options_bidding_time_period') as HTMLInputElement).value;
-    console.log(costUpdateDelay, biddingTimePeriod);
+    const data = {
+        cost_update_delay: parseInt((document.getElementById('options_cost_update_delay') as HTMLInputElement).value, 10),
+        bidding_time_period: parseInt((document.getElementById('options_bidding_time_period') as HTMLInputElement).value, 10)
+    }
+    console.log(data);
+    return data;
   }
 
   public edit() {
-    const myId = localStorage.id;
-    const company = (document.getElementById('editor_stock_company') as HTMLInputElement).value;
-    const count = (document.getElementById('editor_stock_count') as HTMLInputElement).value;
-    const distribution = (document.getElementById('editor_stock_distribution') as HTMLInputElement).value;
-    const startPrice = (document.getElementById('editor_stock_start_price') as HTMLInputElement).value;
-    console.log(myId, company, count, distribution, startPrice);
+    const data = { id: parseInt(localStorage.id, 10),
+        company: (document.getElementById('editor_stock_company_E') as HTMLInputElement).value,
+        number: parseInt((document.getElementById('editor_stock_count_E') as HTMLInputElement).value, 10),
+        distribution: (document.getElementById('editor_stock_distribution_E') as HTMLInputElement).value,
+        start_price: parseInt((document.getElementById('editor_stock_start_price_E') as HTMLInputElement).value, 10)
+    };
+    console.log(data);
+    return data;
   }
 
-  public getId(id) {
+    public getId() {
+        return localStorage.id;
+    }
+
+  public setId(id) {
     localStorage.id = id;
   }
 }

@@ -8,9 +8,11 @@ import {delay} from 'rxjs/operators';
     styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-    constructor(private service: MembersService) { }
+    constructor(private service: MembersService) {
+    }
 
     private loading = true;
+
 
     ngOnInit() {
         this.service.fetchMembers()
@@ -21,7 +23,15 @@ export class MembersComponent implements OnInit {
 
     delMember(id: number) {
         this.service.removeMember(id)
-        .subscribe(() => {
+            .subscribe(() => {
+                this.service.fetchMembers()
+                    .subscribe();
+            });
+    }
+
+    incMoney(id: number) {
+        this.service.incMoney(id)
+            .subscribe(() => {
                 this.service.fetchMembers()
                     .subscribe();
             });

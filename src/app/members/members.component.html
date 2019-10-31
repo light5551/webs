@@ -14,7 +14,7 @@
             <th class="pb-4 pt-4">{{member.id}}</th>
             <td class="pt-4 pb-4">{{member.name}}</td>
             <td class="pt-4 pb-4">{{member.money}}</td>
-            <td><a class="btn btn-outline-success m-1">+ 1000$</a></td>
+            <td><a class="btn btn-outline-success m-1" (click)="incMoney(member.id)">+ 1000$</a></td>
             <td><a class="btn btn-outline-danger m-1" (click)="delMember(member.id)">Remove</a></td>
         </tr>
         </tbody>

@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as fs from 'fs';
 import FSHelper from '../fs_helper';
-import {json} from "express";
 
 export const register = ( app: express.Application ) => {
     const router = express.Router();
@@ -15,23 +14,20 @@ export const register = ( app: express.Application ) => {
     router.post('/add', (req: express.Request, res: express.Response) => {
         fs.readFile(storage, (err, data) => {
             const jsonData = JSON.parse(data.toString());
-            // tslint:disable-next-line:prefer-for-of
-            for (let i = 0; i < jsonData.length; i++) {
-                if (req.body.id === jsonData[i].id) {
-                    return;
-                }
-            }
             const dict = {
-                id: req.body.id,
+                id: FSHelper.newId(jsonData),
                 company: req.body.company,
                 number: req.body.number,
                 distribution: req.body.distribution,
                 start_price: req.body.start_price
             };
             jsonData.push(dict);
+            jsonData.sort((a: any, b: any) => {
+                return a.id - b.id;
+            })
             FSHelper.saveToFile(storage, JSON.stringify(jsonData));
         });
-        res.send('ok');
+        res.send('{ "status": 200 }');
     });
 
     router.post('/del', (req: express.Request, res: express.Response) => {
@@ -44,9 +40,12 @@ export const register = ( app: express.Application ) => {
                     break;
                 }
             }
+            jsonData.sort((a: any, b: any) => {
+                return a.id - b.id;
+            })
             FSHelper.saveToFile(storage, JSON.stringify(jsonData));
         });
-        res.send('ok');
+        res.send('{ "status": 200 }');
     });
 
     router.post('/edit', (req: express.Request, res: express.Response) => {
@@ -64,7 +63,7 @@ export const register = ( app: express.Application ) => {
             }
             FSHelper.saveToFile(storage, JSON.stringify(jsonData));
         });
-        res.send('ok');
+        res.send('{ "status": 200 }');
     });
 
     app.use('/securities', router);

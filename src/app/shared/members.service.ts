@@ -45,4 +45,19 @@ export class MembersService {
             catchError(this.handleError)
         );
   }
+
+  incMoney(memID: number): Observable<Member> {
+    const data: Member = {id: memID, name: '', money: 1000};
+    return this.http.post<Member>(this.serverUrl + 'edit', data, this.httpOptions)
+        .pipe(
+            catchError(this.handleError)
+        );
+  }
+
+  addMember(item: Member): Observable<Member> {
+    return this.http.post<Member>(this.serverUrl + 'add', item, this.httpOptions)
+        .pipe(
+            catchError(this.handleError)
+        );
+  }
 }

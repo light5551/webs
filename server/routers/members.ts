@@ -15,17 +15,15 @@ export const register = ( app: express.Application ) => {
         fs.readFile(storage, (err, data) => {
             const jsonData = JSON.parse(data.toString());
             // tslint:disable-next-line:prefer-for-of
-            for (let i = 0; i < jsonData.length; i++) {
-                if (req.body.id === jsonData[i].id) {
-                    return;
-                }
-            }
             const dict = {
-                id: req.body.id,
+                id: FSHelper.newId(jsonData),
                 name: req.body.name,
                 money: req.body.money
             };
             jsonData.push(dict);
+            jsonData.sort((a: any, b: any) => {
+                return a.id - b.id;
+            });
             FSHelper.saveToFile(__dirname + '/../storage/members.json', JSON.stringify(jsonData));
         });
         res.send('{ "status": 200 }');
@@ -41,6 +39,9 @@ export const register = ( app: express.Application ) => {
                     break;
                 }
             }
+            jsonData.sort((a: any, b: any) => {
+                return a.id - b.id;
+            })
             FSHelper.saveToFile(__dirname + '/../storage/members.json', JSON.stringify(jsonData));
         });
         res.send('{ "status": 200 }');
