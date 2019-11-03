@@ -1,48 +1,22 @@
 import React from 'react';
 import Stock from "./Stock";
+import BasicComponent from '../ifaces/BasicComponent';
 
-const stocks = [
-    {
-        id:0,
-        company:'Company1',
-        stockCount:'500',
-        distribution: 'Normal',
-        stockPrice: '100'
-    },
-    {
-        id:1,
-        company:'Company2',
-        stockCount:'100',
-        distribution: 'Pois',
-        stockPrice: '150'
-    },
-    {
-        id:2,
-        company:'Company3',
-        stockCount:'200',
-        distribution: 'Binom',
-        stockPrice: '150'
-    },
-    {
-        id:3,
-        company:'Company2',
-        stockCount:'100',
-        distribution: 'Uniform',
-        stockPrice: '150'
+class StockList extends BasicComponent{
+
+    constructor(props) {
+        super(props,"http://localhost:4201/securities/");
     }
-]
 
-
-
-class StockList extends React.Component{
     render() {
 
         const scrollContainerStyle = {maxHeight: "600px" };
+        const { error, isLoaded, items } = this.state;
         let stks = [];
-        stocks.forEach(e => {
-            stks.push(<Stock key={e.id} id={e.id} company={e.company} stockPrice={e.stockPrice} stockCount={e.stockCount}
-    distribution={e.distribution}/>)
-        });
+        items.forEach(e => {
+            stks.push(<Stock key={e.id} id={e.id} company={e.company} stockPrice={e.start_price} stockCount={e.number}
+                             distribution={e.distribution}/>)})
+        console.log(items);
         return (
 
             <div className="container border border-grey">
@@ -59,7 +33,7 @@ class StockList extends React.Component{
                         </tr>
                         </thead>
                         <tbody>
-                        {stks}
+                        {stks }
                         </tbody>
                     </table>
                 </div>

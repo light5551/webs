@@ -51,7 +51,7 @@ export default class FSHelper {
     }
 
     static configureCORS() {
-        const originsWhitelist = 'http://localhost:4200';
+        const originsWhitelist = 'http://localhost:3000';
         const options: cors.CorsOptions = {
             allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token'],
             credentials: true,

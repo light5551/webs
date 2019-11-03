@@ -1,41 +1,20 @@
 import React from 'react';
 import { MDBContainer, MDBScrollbar } from "mdbreact";
 import Member from "./Member";
+import BasicComponent from "../ifaces/BasicComponent";
 
-const members = [
-    {
-        id:0,
-        name:'Mark',
-        money:'500'
-    },
-    {
-        id:1,
-        name:'Tom',
-        money:'540'
-    },
-    {
-        id:2,
-        name:'Alex',
-        money:'100'
-    },
-    {
-        id:3,
-        name:'Sergey',
-        money:'9999'
-    },
-    {
-        id:4,
-        name:'Yarik',
-        money:'-100'
-    },
-]
+class Members extends BasicComponent{
 
+    constructor(props) {
+        super(props, "http://localhost:4201/members/");
 
-class Members extends React.Component{
+    }
+
     render() {
         const scrollContainerStyle = { width: "500px", maxHeight: "600px" };
+        const { error, isLoaded, items } = this.state;
         let mems = [];
-        members.forEach(e => {
+        items.forEach(e => {
             mems.push(<Member key={e.id} id={e.id} name={e.name} money={e.money}></Member>)
         });
 
