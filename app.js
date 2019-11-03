@@ -10,6 +10,7 @@ var membersRouter = require('./routes/members');
 var optionsRouter = require('./routes/options');
 var auctionRouter = require('./routes/auction');
 var personRouter= require('./routes/person');
+var loginRouter = require('./routes/login');
 
 var app = express();
 //var server = require('http').createServer(app);
@@ -32,7 +33,7 @@ app.use('/members', membersRouter);
 app.use('/options', optionsRouter);
 app.use('/auction', auctionRouter);
 app.use('/person', personRouter);
-
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

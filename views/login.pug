@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href="/stylesheets/w3.css")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Karma")
+    body
+        div
+            label(for='login') Login
+            input(id='login')
+        div
+            label(for='password') Password
+            input(id='password' type='password')
+        div
+            button(type='submit' onclick='login();') Go
+        script
+            include ../public/javascripts/login.js
