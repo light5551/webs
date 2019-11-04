@@ -2,9 +2,10 @@ import React from 'react';
 
 
 const Badges = {
-    normal: 'success',
-    puasson: 'warning',
-    unified: 'primary',
+    Normal: 'success',
+    Pois: 'warning',
+    Uniform: 'primary',
+    Binom: 'danger'
 }
 
 class Stock extends React.Component{
