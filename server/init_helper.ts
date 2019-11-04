@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import * as memRouter from './routers/members';
 import * as optionsRouter from './routers/options';
 import * as secursRouter from './routers/securities';
+import * as usersRouter from './routers/users';
 
 export default class FSHelper {
     static appendFiles() {
@@ -19,6 +20,17 @@ export default class FSHelper {
                 '{"id":3, "name": "Билли Бонс", "money": 2000000}, ' +
                 '{"id":4, "name": "Борис Бритва", "money": 53000000}, ' +
                 '{"id":5, "name": "Пещера Чудес", "money": 10000000000} ' +
+                ']');
+        }
+
+        if (!fs.existsSync(__dirname + '/storage/users.json')) {
+            fs.appendFileSync(__dirname + '/storage/users.json', '[ ' +
+                '{"id":0, "uname": "admin", "password": "admin"}, ' +
+                '{"id":1, "uname": "user1", "password": "1"}, ' +
+                '{"id":2, "uname": "user2", "password": "1"}, ' +
+                '{"id":3, "uname": "user3", "password": "1"}, ' +
+                '{"id":4, "uname": "user4", "password": "1"}, ' +
+                '{"id":5, "uname": "user5", "password": "1"}, ' +
                 ']');
         }
 
@@ -46,6 +58,7 @@ export default class FSHelper {
         memRouter.register(app);
         optionsRouter.register(app);
         secursRouter.register(app);
+        usersRouter.register(app);
 
         app.use('*', cors(corsOptions));
     }

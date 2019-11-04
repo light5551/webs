@@ -10,6 +10,12 @@ class Members extends BasicComponent{
 
     }
 
+    async componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        const res = await this.sendRequest()
+        const data = await res.json()
+        this.setState({items: data})
+    }
+
     render() {
         const scrollContainerStyle = { width: "500px", maxHeight: "600px" };
         const { error, isLoaded, items } = this.state;

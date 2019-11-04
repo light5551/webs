@@ -17,14 +17,24 @@ class BasicComponent extends React.Component{
         };
     }
 
-    async componentDidMount() {
-        const res = await fetch(this.url, this.httpOpts)
+    async sendRequest(data = null, method = "GET", dest = "")
+    {
+        let opts = this.httpOpts;
+        if(data)
+            opts.body = JSON.stringify(data);
+        opts.method = method;
+        return await fetch(this.url + dest, opts)
             .catch(function() {
                 console.log("error");
             });
+    }
+
+    async componentDidMount() {
+        const res = await this.sendRequest()
         const data = await res.json();
         this.setState({items: data, isLoaded: true})
     }
+
 }
 
 export default BasicComponent;

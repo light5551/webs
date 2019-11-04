@@ -10,4 +10,16 @@ export default class FSHelper {
             }
         });
     }
+
+    static newId(jsonData: any) {
+        let id = 1;
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < jsonData.length; i++) {
+            if (id !== jsonData[i].id) {
+                break;
+            }
+            id++;
+        }
+        return id;
+    }
 }

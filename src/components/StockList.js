@@ -8,6 +8,12 @@ class StockList extends BasicComponent{
         super(props,"http://localhost:4201/securities/");
     }
 
+    async componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        const res = await this.sendRequest()
+        const data = await res.json()
+        this.setState({items: data})
+    }
+
     render() {
 
         const scrollContainerStyle = {maxHeight: "600px" };
@@ -16,7 +22,6 @@ class StockList extends BasicComponent{
         items.forEach(e => {
             stks.push(<Stock key={e.id} id={e.id} company={e.company} stockPrice={e.start_price} stockCount={e.number}
                              distribution={e.distribution}/>)})
-        console.log(items);
         return (
 
             <div className="container border border-grey">

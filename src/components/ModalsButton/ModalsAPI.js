@@ -2,6 +2,7 @@ import React from 'react';
 import AddMemberModal from "./AddMemberModal";
 import ExchangeOptionsModal from "./ExchangeOptionsModal";
 import AddStockModal from "./AddStockModal";
+import LogInModal from "./LogInModal";
 
 class ModalsAPI extends React.Component{
 
@@ -11,6 +12,7 @@ class ModalsAPI extends React.Component{
               <AddMemberModal/>
               <ExchangeOptionsModal/>
               <AddStockModal/>
+              <LogInModal />
           </div>
       )
   }

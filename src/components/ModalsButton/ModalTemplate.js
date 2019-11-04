@@ -1,6 +1,15 @@
 import React from 'react';
 
 class ModalTemplate extends React.Component{
+    static defaultProps = {
+        save_text: 'Save Changes'
+    }
+
+    constructor(props)
+    {
+        super(props);
+    }
+
     render() {
 
         return (
@@ -19,7 +28,7 @@ class ModalTemplate extends React.Component{
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.props.fun}>Save changes</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.props.fun}>{this.props.save_text}</button>
                         </div>
                     </div>
                 </div>
