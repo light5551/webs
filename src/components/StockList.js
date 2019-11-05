@@ -21,7 +21,7 @@ class StockList extends BasicComponent{
         let stks = [];
         items.forEach(e => {
             stks.push(<Stock key={e.id} id={e.id} company={e.company} stockPrice={e.start_price} stockCount={e.number}
-                             distribution={e.distribution}/>)})
+                             distribution={e.distribution} userId={this.props.userId}/>)})
         return (
 
             <div className="container border border-grey">

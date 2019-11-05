@@ -12,7 +12,7 @@ class ModalsAPI extends React.Component{
               <AddMemberModal/>
               <ExchangeOptionsModal/>
               <AddStockModal/>
-              <LogInModal />
+              <LogInModal update={this.props.update}/>
           </div>
       )
   }

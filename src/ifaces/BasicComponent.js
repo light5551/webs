@@ -31,6 +31,7 @@ class BasicComponent extends React.Component{
 
     async componentDidMount() {
         const res = await this.sendRequest()
+        console.log(res);
         const data = await res.json();
         this.setState({items: data, isLoaded: true})
     }

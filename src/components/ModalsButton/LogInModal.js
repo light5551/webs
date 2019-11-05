@@ -13,17 +13,21 @@ class LogInModal extends BasicComponent{
                 this.send();
             }}>
                     <InputModal id='Username' ph='username'>Log In</InputModal>
-                    <InputModal id='Password' ph='password'></InputModal>
+                    <InputModal id='Password' ph='password'/>
             </ModalTemplate>
         )
     }
 
     async send() {
-        const data = {uname: document.getElementById('Username').value,
-                      password: document.getElementById('Password').value };
-        const res = await this.sendRequest(data, "POST", "login")
+        const data = {
+            uname: document.getElementById('Username').value,
+                      password: document.getElementById('Password').value
+        };
+        const res = await this.sendRequest(data, "POST", "login");
+        console.log(res);
         const json = await res.json();
         console.log('id: ', json.id)
+        this.props.update(json.id);
     }
 }
 

@@ -8,19 +8,19 @@ class Content extends React.Component{
     render() {
         return (
             <div>
-                    <StockList></StockList>
+                    <StockList userId={this.props.userId}/>
                 <br/>
                 <br/>
-               <ProgressBar></ProgressBar>
+               <ProgressBar/>
                 <br/>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="mr-auto ml-auto">
-                            <Members></Members>
+                            <Members userId={this.props.userId}/>
                         </div>
 
                         <div className="ml-auto mr-auto">
-                            <Messages></Messages>
+                            <Messages/>
                         </div>
 
 

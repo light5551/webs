@@ -30,7 +30,7 @@ export default class FSHelper {
                 '{"id":2, "uname": "user2", "password": "1"}, ' +
                 '{"id":3, "uname": "user3", "password": "1"}, ' +
                 '{"id":4, "uname": "user4", "password": "1"}, ' +
-                '{"id":5, "uname": "user5", "password": "1"}, ' +
+                '{"id":5, "uname": "user5", "password": "1"} ' +
                 ']');
         }
 
@@ -40,11 +40,11 @@ export default class FSHelper {
         }
 
         if (!fs.existsSync(__dirname + '/storage/securities.json')) {
-            fs.appendFileSync(__dirname + '/storage/securities.json', '[ {"id":1,"company":"Gazpromchik","number":1500,"distribution":"normal","start_price":4000},' +
-                '{"id":2,"company":"Uruandex","number":8300,"distribution":"puasson","start_price":2000},' +
-                '{"id":3,"company":"OOO Sinyak","number":4760,"distribution":"normal","start_price":1700},' +
-                '{"id":4,"company":"Gazmyas","number":1300,"distribution":"puasson","start_price":4000},' +
-                '{"id":5,"company":"Ust-Tech","number":2500,"distribution":"normal","start_price":2600}]');
+            fs.appendFileSync(__dirname + '/storage/securities.json', '[ {"id":1,"company":"Gazpromchik","number":1500,"distribution":"Normal","start_price":4000},' +
+                '{"id":2,"company":"Uruandex","number":8300,"distribution":"Pois","start_price":2000},' +
+                '{"id":3,"company":"OOO Sinyak","number":4760,"distribution":"Normal","start_price":1700},' +
+                '{"id":4,"company":"Gazmyas","number":1300,"distribution":"Binom","start_price":4000},' +
+                '{"id":5,"company":"Ust-Tech","number":2500,"distribution":"Uniform","start_price":2600}]');
         }
     }
 
