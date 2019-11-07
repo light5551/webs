@@ -8,6 +8,8 @@ export const register = ( app: express.Application ) => {
 
     router.get('/', (req: express.Request, res: express.Response) =>  {
         fs.readFile(storage, (err, data) => {
+            console.log('err uss -- ' + err)
+            console.log('data uss -- ' + data)
             res.send(data.toString()    );
         });
     });

@@ -27,6 +27,12 @@ class AddMemberModal extends BasicComponent{
         //this.forceUpdate();
         await this.Update();
     }
+
+    async Update(url='members') {
+        const res = await this.sendRequest(null,'GET',url)
+        const data = await res.json()
+        await this.setState({items: data, isLoaded: true})
+    }
 }
 
 export default AddMemberModal;

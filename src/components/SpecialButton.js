@@ -3,7 +3,8 @@ import React from 'react';
 const Colours = {
     green: 'success',
     red: 'danger',
-    yellow: 'warning'
+    yellow: 'warning',
+    blue: 'primary'
 }
 
 class SpecialButton extends React.Component{

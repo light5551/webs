@@ -35,7 +35,7 @@ class Stock extends React.Component{
                         <td className='list-group list-group-horizontal'>
                             <div className='d-flex align-items-baseline'><InputModal type='number' id={'BuyCount' + this.props.id} max={this.props.stockCount}> </InputModal></div>
                             <div className='d-flex align-items-baseline ml-2'><SpecialButton colour='red' fun={() => {
-                                document.getElementById('BuyCount'+this.props.id).stepUp(0);
+                                let value = document.getElementById('BuyCount'+this.props.id).stepUp(0);
                                 console.log('BUY count: ' + document.getElementById('BuyCount'+this.props.id).value)
                             }}>Buy</SpecialButton></div>
                         </td>

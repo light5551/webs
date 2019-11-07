@@ -43,6 +43,8 @@ class BasicComponent extends React.Component{
 
     async Update() {
         const res = await this.sendRequest()
+        console.log('URL:'+this.url + ' -- ' +res)
+        console.log(res.body)
         const data = await res.json()
         await this.setState({items: data, isLoaded: true})
     }
