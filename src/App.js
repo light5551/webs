@@ -15,8 +15,7 @@ class App extends React.Component{
     render() {
         return (
             <div>
-                <p>{this.state.id}</p>
-                <Header userId={this.state.id}/>
+                <Header update={this.updateClient} userId={this.state.id}/>
                 <Content userId={this.state.id}/>
                 <ModalsAPI update={this.updateClient}/>
             </div>

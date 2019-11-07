@@ -9,7 +9,7 @@ class AddStockModal extends BasicComponent{
     }
     render() {
         return (
-            <ModalTemplate id="AddStock" title="Add Stock" fun={() => {this.send()}}>
+            <ModalTemplate id="AddStock" title="Add Stock" fun={() => {this.send();}}>
                 <InputModal id='StockCompany' ph='Name/Surname'>Company</InputModal>
                 <InputModal id='StockCount'>Count</InputModal>
                 <InputModal id='StockStartPrice'>Start Price</InputModal>

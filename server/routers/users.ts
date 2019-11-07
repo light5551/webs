@@ -31,13 +31,10 @@ export const register = ( app: express.Application ) => {
 
     router.post('/login', (req: express.Request, res: express.Response) => {
         fs.readFile(storage, (err, data) => {
-            console.log('dqwd')
             const jsonData = JSON.parse(data.toString());
             for (let i = 0; i < jsonData.length; i++) {
-                console.log('iter')
                 if(req.body.uname === jsonData[i].uname && req.body.password === jsonData[i].password)
                 {
-                    console.log('finish')
                     res.send('{ "id": ' + jsonData[i].id + '}');
                     return
                 }

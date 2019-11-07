@@ -2,6 +2,7 @@ import React from 'react';
 import { MDBContainer, MDBScrollbar } from "mdbreact";
 import Member from "./Member";
 import BasicComponent from "../ifaces/BasicComponent";
+import SpecialButton from "./SpecialButton";
 
 class Members extends BasicComponent{
 
@@ -10,10 +11,13 @@ class Members extends BasicComponent{
 
     }
 
-    async componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+
+    async Update(id) {
+        const  a = await this.sendRequest({id:parseInt(id),money: 1000}, 'POST','edit')
+        await console.log(a);
         const res = await this.sendRequest()
         const data = await res.json()
-        this.setState({items: data})
+        await this.setState({items: data})
     }
 
     render() {
@@ -21,7 +25,14 @@ class Members extends BasicComponent{
         const { error, isLoaded, items } = this.state;
         let mems = [];
         items.forEach(e => {
-            mems.push(<Member key={e.id} id={e.id} name={e.name} money={e.money}></Member>)
+            if (this.isAdmin())
+                mems.push(<Member key={e.id} id={e.id} name={e.name} money={e.money}>
+                    <SpecialButton colour='yellow' fun={() => {
+                        this.Update(e.id)
+                    }}>+1000$</SpecialButton>
+                </Member>)
+            else
+                mems.push(<Member key={e.id} id={e.id} name={e.name} money={e.money}/>)
         });
 
         return (
@@ -49,6 +60,10 @@ class Members extends BasicComponent{
                 </div>
             </MDBContainer>
         )
+    }
+
+    isAdmin() {
+        return this.props.userId === 0
     }
 }
 

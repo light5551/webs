@@ -7,6 +7,7 @@ class Member extends React.Component{
                 <th scope="row">{this.props.id}</th>
                 <td>{this.props.name}</td>
                 <td><kbd>{this.props.money + '$'}</kbd></td>
+                <td>{this.props.children}</td>
             </tr>
         )
     }

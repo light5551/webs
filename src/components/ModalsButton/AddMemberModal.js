@@ -13,7 +13,7 @@ class AddMemberModal extends BasicComponent{
                 this.send();
             }}>
                     <InputModal id='MemberName' ph='Name/Surname'>Name of Member</InputModal>
-                    <InputModal id='MemberMoney' ph='$'></InputModal>
+                    <InputModal id='MemberMoney' ph='$'/>
             </ModalTemplate>
         )
     }
@@ -22,8 +22,9 @@ class AddMemberModal extends BasicComponent{
         const data = {name: document.getElementById('MemberName').value,
                       money: document.getElementById('MemberMoney').value };
         await this.sendRequest(data, "POST", "add")
-        this.state.items.push(data);
-        this.forceUpdate();
+        //this.state.items.push(data);
+        //this.forceUpdate();
+        await this.Update();
     }
 }
 
