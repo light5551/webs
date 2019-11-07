@@ -10,12 +10,20 @@ router.get('/', function(req, res, next) {
 
 const accounts = [
     {
-        username: "aa",
-        password: "aa"
+        username: "glazunov",
+        password: "1"
     },
     {
-        username: "bb",
-        password: "bb"
+        username: "admin",
+        password: "1"
+    },
+    {
+        username: "gosudarkin",
+        password: "1"
+    },
+    {
+        username: "tokarev",
+        password: "1"
     }
 ]
 
@@ -25,7 +33,7 @@ router.post('/login', (req, res, next) => {
     for (let i = 0; i < accounts.length; i++)
     {
         if (accounts[i]['username'] === req.body.username &&
-            accounts[i]['password'] === req.body.password) {
+            accounts[i]['password'] == req.body.password) {
             isOk = true;
         }
     }

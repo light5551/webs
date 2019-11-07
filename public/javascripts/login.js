@@ -1,11 +1,19 @@
 const accounts = [
     {
-        username: "aa",
-        password: "aa"
+        username: "glazunov",
+        password: "1"
     },
     {
-        username: "bb",
-        password: "bb"
+        username: "admin",
+        password: "1"
+    },
+    {
+        username: "gosudarkin",
+        password: "1"
+    },
+    {
+        username: "tokarev",
+        password: "1"
     }
 ]
 
@@ -19,6 +27,7 @@ function login() {
     })
     if (ok)
     {
+        localStorage.mainName = username;
         localStorage.ok = true;
         window.location = 'auction?auth=1';
     }
