@@ -25,7 +25,7 @@ class BasicComponent extends React.Component{
         else
             opts.body = null;
         opts.method = method;
-        console.log('DATA == '+data, '----'+ opts.body)
+        //console.log('URL: ' + this.url + dest + ', DATA == '+JSON.stringify(data), '----'+ opts.body)
         return await fetch(this.url + dest, opts)
             .catch(function(err, data) {
                 console.log(err, data)
@@ -34,7 +34,7 @@ class BasicComponent extends React.Component{
     }
 
     async componentDidMount() {
-      this.Update();
+      await this.Update();
         /*const res = await this.sendRequest()
         console.log(res);
         const data = await res.json();
@@ -43,9 +43,8 @@ class BasicComponent extends React.Component{
 
     async Update() {
         const res = await this.sendRequest()
-        console.log('URL:'+this.url + ' -- ' +res)
-        console.log(res.body)
         const data = await res.json()
+        console.log('UPDATE URL:'+this.url + ' -- ' +JSON.stringify(data))
         await this.setState({items: data, isLoaded: true})
     }
 

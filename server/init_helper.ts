@@ -26,11 +26,11 @@ export default class FSHelper {
         if (!fs.existsSync(__dirname + '/storage/users.json')) {
             fs.appendFileSync(__dirname + '/storage/users.json', '[ ' +
                 '{"id":0, "uname": "admin", "password": "admin"}, ' +
-                '{"id":1, "uname": "user1", "password": "1"}, ' +
-                '{"id":2, "uname": "user2", "password": "1"}, ' +
-                '{"id":3, "uname": "user3", "password": "1"}, ' +
-                '{"id":4, "uname": "user4", "password": "1"}, ' +
-                '{"id":5, "uname": "user5", "password": "1"} ' +
+                '{"id":1, "uname": "user1", "password": "1", "stocks": [{"id": 2, "number": 50}]}, ' +
+                '{"id":2, "uname": "user2", "password": "1", "stocks": []}, ' +
+                '{"id":3, "uname": "user3", "password": "1", "stocks": [{"id": 4, "number": 50}]}, ' +
+                '{"id":4, "uname": "user4", "password": "1", "stocks": []}, ' +
+                '{"id":5, "uname": "user5", "password": "1", "stocks": []} ' +
                 ']');
         }
 

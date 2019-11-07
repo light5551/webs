@@ -24,9 +24,9 @@ class LogInModal extends BasicComponent{
                       password: document.getElementById('Password').value
         };
         const res = await this.sendRequest(data, "POST", "login");
-        console.log(res);
+        console.log('LOGIN: ' +JSON.stringify(res));
         const json = await res.json();
-        console.log('id: ', json.id)
+        console.log('LOGIN id: ', json.id)
         this.props.update(json.id);
     }
 }

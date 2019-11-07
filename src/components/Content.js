@@ -27,7 +27,7 @@ class Content extends React.Component{
                         </div>
                         {this.props.userId > 0 &&
                             <div className="mr-auto ml-auto">
-                                <SaledStockList/>
+                                <SaledStockList userId={this.props.userId}/>
                             </div>
                         }
 

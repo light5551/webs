@@ -6,10 +6,22 @@ export const register = ( app: express.Application ) => {
     const router = express.Router();
     const storage = __dirname + '/../storage/members.json';
 
+    router.get('/money:id', (req: express.Request, res: express.Response) =>  {
+        fs.readFile(storage, (err, data) => {
+            const jsonData = JSON.parse(data.toString());
+            for (let i = 0; i < jsonData.length; i++) {
+                console.log("ITER")
+                if (req.params.id == jsonData[i].id) {
+                    let dat = { money: jsonData[i].money };
+                    console.log("GOT: " + JSON.stringify(dat))
+                    res.send(JSON.stringify(dat));
+                    break;
+                }
+            }
+        });
+    });
     router.get('/', (req: express.Request, res: express.Response) =>  {
         fs.readFile(storage, (err, data) => {
-            console.log(err);
-            console.log(data.toString())
             res.send(data.toString()    );
         });
     });

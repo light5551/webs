@@ -6,9 +6,17 @@ export const register = ( app: express.Application ) => {
     const router = express.Router();
     const storage = __dirname + '/../storage/securities.json';
 
-    router.get('/', (req: express.Request, res: express.Response) =>  {
+    router.get('/price:id', (req: express.Request, res: express.Response) =>  {
         fs.readFile(storage, (err, data) => {
-            res.send(data.toString());
+            const jsonData = JSON.parse(data.toString());
+            for (let i = 0; i < jsonData.length; i++) {
+                if (req.params.id == jsonData[i].id) {
+                    let dat = {price: jsonData[i].start_price };
+                    console.log("GOT PRICE: " + JSON.stringify(dat))
+                    res.send(JSON.stringify(dat));
+                    break;
+                }
+            }
         });
     });
 
@@ -64,6 +72,22 @@ export const register = ( app: express.Application ) => {
                     jsonData[i].number = req.body.number;
                     jsonData[i].distribution = req.body.distribution;
                     jsonData[i].start_price = req.body.start_price;
+                    break;
+                }
+            }
+            FSHelper.saveToFile(storage, JSON.stringify(jsonData));
+        });
+        res.send('{ "status": 200 }');
+    });
+
+    router.post('/setcount', (req: express.Request, res: express.Response) => {
+        fs.readFile(storage, (err, data) => {
+            const jsonData = JSON.parse(data.toString());
+            // tslint:disable-next-line:prefer-for-of
+            for (let i = 0; i < jsonData.length; i++) {
+                if (req.body.id === jsonData[i].id) {
+                    jsonData[i].number += parseInt(req.body.number,10);
+                    console.log('DEC by: ' + req.body.number)
                     break;
                 }
             }

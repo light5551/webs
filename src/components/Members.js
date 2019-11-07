@@ -11,6 +11,11 @@ class Members extends BasicComponent{
 
     }
 
+    async componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        const res = await this.sendRequest()
+        const data = await res.json()
+        await this.setState({items: data})
+    }
 
     async Update(id) {
         const  a = await this.sendRequest({id:parseInt(id),money: 1000}, 'POST','edit')

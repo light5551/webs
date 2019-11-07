@@ -1,22 +1,25 @@
 import React from 'react';
-import Stock from "./Stock";
 import SaledStock from "./SaledStock";
+import BasicComponent from "../ifaces/BasicComponent";
 
-class SaledStockList extends React.Component{
-    propsDefault = {
-        id: 0
-    }
+class SaledStockList extends BasicComponent{
 
     constructor(props) {
-        super(props)
+        super(props, "http://localhost:4201/users/stock" + props.userId)
         this.saledStocks = [{id:1, company:'aa', count:5}]
     }
+
+    async componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+        const res = await this.sendRequest()
+        const data = await res.json()
+        await this.setState({items: data})
+    }
+
     render() {
-        let stks = []
-        //if (this.props.id)
-        //    this.saledStocks.push({id:this.props.id, company: this.props.company, count: this.props.count})
-        this.saledStocks.forEach(e => {
-            stks.push(<SaledStock key={e.id} id={e.id} company={e.company} count={e.count} />)})
+        const { error, isLoaded, items } = this.state;
+        let stks = [];
+        items.forEach(e => {
+            stks.push(<SaledStock userId={this.props.userId} key={e.id} id={e.id} company={e.company} count={e.number} />)})
         return (
             <div className="container border border-grey">
                 <h2><i>Your Stocks</i></h2>

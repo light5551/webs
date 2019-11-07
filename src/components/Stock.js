@@ -33,10 +33,28 @@ class Stock extends React.Component{
                              :
 
                         <td className='list-group list-group-horizontal'>
-                            <div className='d-flex align-items-baseline'><InputModal type='number' id={'BuyCount' + this.props.id} max={this.props.stockCount}> </InputModal></div>
-                            <div className='d-flex align-items-baseline ml-2'><SpecialButton colour='red' fun={() => {
-                                let value = document.getElementById('BuyCount'+this.props.id).stepUp(0);
-                                console.log('BUY count: ' + document.getElementById('BuyCount'+this.props.id).value)
+                            <div className='d-flex align-items-baseline'><input type='number' id={'BuyCount' + this.props.id} min={1} max={this.props.stockCount}/> </div>
+                            <div className='d-flex align-items-baseline ml-2'><SpecialButton colour='red' fun={async () => {
+                                let value = document.getElementById('BuyCount'+this.props.id);
+                                value.stepUp(0);
+                                console.log('BUY count: ' + value.value + '| USER: ' + this.props.userId)
+                                let money = await this.sendRequest(null, "GET", 'http://localhost:4201/members/money' + this.props.userId)
+                                let money_data = await money.json();
+
+                                //console.log('BOB: ' + money_data.money)
+
+                                if (money_data.money >= value.value * this.props.stockPrice) {
+                                    console.log('SOLD!')
+                                    let buydata = {id: this.props.id, number: -value.value};
+                                    this.sendRequest(buydata, "POST", 'http://localhost:4201/securities/setcount')
+                                    let selldata = {id: this.props.id, number: value.value};
+                                    this.sendRequest(selldata, "POST", 'http://localhost:4201/users/stock' + this.props.userId)
+                                    let moneydata = {
+                                        id: this.props.userId,
+                                        money: -(parseInt(this.props.stockPrice) * value.value)
+                                    };
+                                    this.sendRequest(moneydata, "POST", 'http://localhost:4201/members/edit')
+                                }
                             }}>Buy</SpecialButton></div>
                         </td>
 
@@ -58,7 +76,7 @@ class Stock extends React.Component{
     };
     async sendRequest(data = null, method = "GET", dest = "")
     {
-        let opts = this.httpOpts;
+        let opts = Object.assign({}, this.httpOpts);
         if(data)
             opts.body = JSON.stringify(data);
         opts.method = method;
