@@ -11,6 +11,12 @@ export const register = ( app: express.Application ) => {
             res.send(data.toString());
         });
     });
+
+    router.get('/', (req: express.Request, res: express.Response) =>  {
+        fs.readFile(storage, (err, data) => {
+            res.send(data.toString());
+        });
+    });
     router.post('/add', (req: express.Request, res: express.Response) => {
         fs.readFile(storage, (err, data) => {
             const jsonData = JSON.parse(data.toString());

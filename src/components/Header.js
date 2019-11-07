@@ -21,6 +21,7 @@ class Header extends React.Component{
             case ADMIN:
                 return(
                         <div className='row'>
+                            <h5 className="my-0 mr-md-auto font-weight-normal pt-1 pr-2"><i><strong>W</strong>elcome, admin!</i></h5>
                             <ButtonHeader name={'Add Member'} />
                             <ButtonHeader name={'Add Stock'}/>
                             <ButtonHeader name={'Exchange Options'}/>
@@ -28,7 +29,12 @@ class Header extends React.Component{
                         </div>
                 );
             default:
-                return(<ButtonHeader update={this.props.update} name={'Log Out'} />);
+                return(
+                    <div className='row'>
+                        <h5 className="my-0 mr-md-auto font-weight-normal pt-1 pr-2"><i><strong>W</strong>elcome, user{this.props.userId}</i></h5>
+                        <ButtonHeader update={this.props.update} name={'Log Out'} />
+                    </div>
+                    );
 
         }
 

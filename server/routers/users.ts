@@ -15,10 +15,11 @@ export const register = ( app: express.Application ) => {
         fs.readFile(storage, (err, data) => {
             const jsonData = JSON.parse(data.toString());
             // tslint:disable-next-line:prefer-for-of
+            const id = FSHelper.newId(jsonData);
             const dict = {
-                id: FSHelper.newId(jsonData),
-                uname: req.body.uname,
-                password: req.body.password
+                id: id,
+                uname: 'user'+id,
+                password: 1
             };
             jsonData.push(dict);
             jsonData.sort((a: any, b: any) => {

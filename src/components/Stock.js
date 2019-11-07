@@ -1,5 +1,6 @@
 import React from 'react';
 import SpecialButton from "./SpecialButton";
+import InputModal from "./ModalsButton/InputModal";
 
 
 const Badges = {
@@ -30,9 +31,14 @@ class Stock extends React.Component{
                          this.isNobody() ?
                     <td><div/></td>
                              :
-                    <td><SpecialButton colour='red' fun={() => {
-                                    console.log('BUY ' + this.props.id)
-                                }}>Buy</SpecialButton></td>
+
+                        <td className='list-group list-group-horizontal'>
+                            <div className='d-flex align-items-baseline'><InputModal type='number' id={'BuyCount' + this.props.id} max={this.props.stockCount}> </InputModal></div>
+                            <div className='d-flex align-items-baseline ml-2'><SpecialButton colour='red' fun={() => {
+                                document.getElementById('BuyCount'+this.props.id).stepUp(0);
+                                console.log('BUY count: ' + document.getElementById('BuyCount'+this.props.id).value)
+                            }}>Buy</SpecialButton></div>
+                        </td>
 
                 }
                 {    this.isValid() && this.isAdmin() &&

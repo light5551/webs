@@ -6,7 +6,7 @@ class InputModal extends React.Component{
         return (
                 <div>
                     <label htmlFor={this.props.id}>{this.props.children}</label>
-                    <input className="form-control" id={this.props.id} placeholder={this.props.ph} defaultValue={this.props.value}/>
+                    <input type={this.props.type} className="form-control" id={this.props.id} placeholder={this.props.ph} defaultValue={this.props.value} max={this.props.max}/>
                 </div>
         )
     }
