@@ -14,4 +14,11 @@ export default class TeorverHelper {
         return (1/(sigma*Math.sqrt(2*Math.PI)))*Math.exp(-(Math.pow(x,2))/(2*sigma*sigma))
     }
 
+    static PriceTimeout(cost:number)
+    {
+        setInterval(() => {
+
+        })
+    }
+
 }

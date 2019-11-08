@@ -13,6 +13,23 @@ const ADMIN = 0;
 const NOBODY = -1;
 
 class Stock extends React.Component{
+
+    constructor(props)
+    {
+        super(props)
+        this.state = {time: 0};
+        this.timer(Math.floor(Math.random() *  (15000 - 5000) + 5000));
+    }
+
+    timer(delay: number) {
+        setInterval(async () => {
+            let coeff = Math.random() *(1.05 - 0.95) + 0.95;
+            console.log(this.state.time + ' c: ' + coeff)
+            await this.sendRequest({id: this.props.id, price: Math.floor(parseInt(this.props.stockPrice)*coeff)}, "POST",'http://localhost:4201/securities/setprice')
+            this.setState({time: new Date().getMilliseconds()})
+        }, delay)
+    }
+
     render() {
         return (
             <tr>

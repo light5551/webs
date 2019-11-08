@@ -81,6 +81,21 @@ export const register = ( app: express.Application ) => {
         res.send('{ "status": 200 }');
     });
 
+    router.post('/setprice', (req: express.Request, res: express.Response) => {
+        fs.readFile(storage, (err, data) => {
+            const jsonData = JSON.parse(data.toString());
+            // tslint:disable-next-line:prefer-for-of
+            for (let i = 0; i < jsonData.length; i++) {
+                if (req.body.id === jsonData[i].id) {
+                    jsonData[i].start_price = req.body.price;
+                    break;
+                }
+            }
+            FSHelper.saveToFile(storage, JSON.stringify(jsonData));
+        });
+        res.send('{ "status": 200 }');
+    })
+
     router.post('/setcount', (req: express.Request, res: express.Response) => {
         fs.readFile(storage, (err, data) => {
             const jsonData = JSON.parse(data.toString());
