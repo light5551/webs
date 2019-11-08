@@ -6,17 +6,9 @@ import ProgressBar from "./ProgressBar";
 import SaledStockList from "./SaledStockList";
 
 class Content extends React.Component{
-    saledList = [
-        {
-            id:1,
-            company:'aa',
-            count: 2
-        }
-    ]
-    addSale()
-    {
-
-    }
+//<div className="ml-auto mr-auto">
+//<Messages/>
+//</div>
     render() {
         return (
             <div>
@@ -45,9 +37,6 @@ class Content extends React.Component{
                             <Members userId={this.props.userId}/>
                         </div>
 
-                        <div className="ml-auto mr-auto">
-                            <Messages/>
-                        </div>
 
 
                     </div>

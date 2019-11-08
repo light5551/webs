@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as fs from 'fs';
 import FSHelper from '../fs_helper';
+import TeorverHelper from '../teorver_helper';
 
 export const register = ( app: express.Application ) => {
     const router = express.Router();
@@ -88,6 +89,21 @@ export const register = ( app: express.Application ) => {
                 if (req.body.id === jsonData[i].id) {
                     jsonData[i].number += parseInt(req.body.number,10);
                     console.log('DEC by: ' + req.body.number)
+                    if(jsonData[i].distribution === "Normal") {
+                        const newprice = TeorverHelper.NormalDistr(jsonData[i].number, Math.abs(parseInt(req.body.number)), jsonData[i].start_price);
+                        console.log('NORMAL SUKA NEWPRICE: ' + newprice);
+                        if (parseInt(req.body.number) > 0) {
+                            jsonData[i].start_price = newprice;
+                        } else {
+                            jsonData[i].start_price += (jsonData[i].start_price - newprice);
+                        }
+                    }
+                    if(jsonData[i].distribution === "Uniform")
+                    {
+                        jsonData[i].start_price += -parseInt(req.body.number,10);
+                        console.log('UNIFORM BLYAT NEWPRICE: ' + jsonData[i].start_price);
+                    }
+                    console.log('JSONPRICE: '+ jsonData[i].start_price);
                     break;
                 }
             }

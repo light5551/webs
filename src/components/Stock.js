@@ -2,7 +2,6 @@ import React from 'react';
 import SpecialButton from "./SpecialButton";
 import InputModal from "./ModalsButton/InputModal";
 
-
 const Badges = {
     Normal: 'success',
     Pois: 'warning',
@@ -21,7 +20,7 @@ class Stock extends React.Component{
                 <td><i>{this.props.company}</i></td>
                 <td><samp>{this.props.stockCount}</samp></td>
                 <td><span className={"badge badge-" + Badges[this.props.distribution]}>{this.props.distribution}</span></td>
-                <td><kbd>{this.props.stockPrice + '$'}</kbd></td>
+                <td><kbd>{Math.floor(this.props.stockPrice) + '$'}</kbd></td>
                 { this.isValid() && this.isAdmin() ?
                     <td><SpecialButton colour='yellow' id={this.props.id} name='EditStock' fun={() => {
                         console.log('EDIT ' + this.props.id);
@@ -53,7 +52,8 @@ class Stock extends React.Component{
                                         id: this.props.userId,
                                         money: -(parseInt(this.props.stockPrice) * value.value)
                                     };
-                                    this.sendRequest(moneydata, "POST", 'http://localhost:4201/members/edit')
+                                    await this.sendRequest(moneydata, "POST", 'http://localhost:4201/members/edit')
+
                                 }
                             }}>Buy</SpecialButton></div>
                         </td>
@@ -96,6 +96,8 @@ class Stock extends React.Component{
     isValid(){
         return this.props.userId >= 0
     }
+
+
 }
 
 export default Stock;

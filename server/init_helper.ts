@@ -41,9 +41,9 @@ export default class FSHelper {
 
         if (!fs.existsSync(__dirname + '/storage/securities.json')) {
             fs.appendFileSync(__dirname + '/storage/securities.json', '[ {"id":1,"company":"Gazpromchik","number":1500,"distribution":"Normal","start_price":4000},' +
-                '{"id":2,"company":"Uruandex","number":8300,"distribution":"Pois","start_price":2000},' +
+                '{"id":2,"company":"Uruandex","number":8300,"distribution":"Normal","start_price":2000},' +
                 '{"id":3,"company":"OOO Sinyak","number":4760,"distribution":"Normal","start_price":1700},' +
-                '{"id":4,"company":"Gazmyas","number":1300,"distribution":"Binom","start_price":4000},' +
+                '{"id":4,"company":"Gazmyas","number":1300,"distribution":"Uniform","start_price":4000},' +
                 '{"id":5,"company":"Ust-Tech","number":2500,"distribution":"Uniform","start_price":2600}]');
         }
     }

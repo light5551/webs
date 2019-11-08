@@ -20,9 +20,9 @@ class AddStockModal extends BasicComponent{
 
     async send() {
         const data = {company: document.getElementById('StockCompany').value,
-                      number: document.getElementById('StockCount').value,
+                      number: parseInt(document.getElementById('StockCount').value),
                       distribution: document.getElementById('StockDistr').value,
-                      start_price: document.getElementById('StockStartPrice').value };
+                      start_price: parseInt(document.getElementById('StockStartPrice').value) };
         await this.sendRequest(data, "POST", "add")
 
     }
