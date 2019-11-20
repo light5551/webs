@@ -10,16 +10,21 @@ class SaledStockList extends BasicComponent{
     }
 
     async componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
-        const res = await this.sendRequest()
-        const data = await res.json()
-        await this.setState({items: data})
+        if (localStorage.updateSaledStockList === "true")
+        {
+            const res = await this.sendRequest()
+            const data = await res.json()
+            localStorage.updateSaledStockList = false;
+            await this.setState({items: data})
+        }
+
     }
 
     render() {
         const { error, isLoaded, items } = this.state;
         let stks = [];
         items.forEach(e => {
-            stks.push(<SaledStock userId={this.props.userId} key={e.id} id={e.id} company={e.company} count={e.number} />)})
+            stks.push(<SaledStock userId={this.props.userId} key={e.id} id={e.id} company={e.company} count={e.number} update={this.props.update}/>)})
         return (
             <div className="container border border-grey">
                 <h2><i>Your Stocks</i></h2>

@@ -9,19 +9,27 @@ class StockList extends BasicComponent{
     }
 
     async componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
-        const res = await this.sendRequest()
-        const data = await res.json()
-        await this.setState({items: data})
+
+        console.log('STOCKLIST')
+        console.log(localStorage.updateStockList);
+        if (localStorage.updateStockList === "true")
+        {
+            console.log('UPDATE = ', localStorage.updateStockList);
+            localStorage.updateStockList = false;
+            const res = await this.sendRequest()
+            const data = await res.json()
+            await this.setState({items: data})
+        }
     }
 
     render() {
-
-        const scrollContainerStyle = {maxHeight: "600px" };
+        const scrollContainerStyle = { maxHeight: "600px" };
         const { error, isLoaded, items } = this.state;
         let stks = [];
         items.forEach(e => {
             stks.push(<Stock key={e.id} id={e.id} company={e.company} stockPrice={e.start_price} stockCount={e.number}
-                             distribution={e.distribution} userId={this.props.userId}/>)})
+                             distribution={e.distribution} userId={this.props.userId}
+                             update={() => {this.forceUpdate()}} updateAll={this.props.update}/>)})
         return (
 
             <div className="container border border-grey">

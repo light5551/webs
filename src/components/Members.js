@@ -12,9 +12,13 @@ class Members extends BasicComponent{
     }
 
     async componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
-        const res = await this.sendRequest()
-        const data = await res.json()
-        await this.setState({items: data})
+        if (localStorage.updateMemberList === "true")
+        {
+            const res = await this.sendRequest()
+            const data = await res.json()
+            localStorage.updateMemberList = false;
+            await this.setState({items: data})
+        }
     }
 
     async Update(id) {
@@ -33,6 +37,7 @@ class Members extends BasicComponent{
             if (this.isAdmin())
                 mems.push(<Member key={e.id} id={e.id} name={e.name} money={e.money}>
                     <SpecialButton colour='yellow' fun={() => {
+                        localStorage.updateMemberList = true;
                         this.Update(e.id)
                     }}>+1000$</SpecialButton>
                 </Member>)

@@ -15,11 +15,11 @@ class Content extends React.Component{
                 <div className='container-fluid'>
                     <div className="row">
                         <div className="mr-auto ml-auto">
-                            <StockList userId={this.props.userId}/>
+                            <StockList userId={this.props.userId} update={() => {this.forceUpdate()}}/>
                         </div>
                         {this.props.userId > 0 &&
                             <div className="mr-auto ml-auto">
-                                <SaledStockList userId={this.props.userId}/>
+                                <SaledStockList userId={this.props.userId} update={() => {this.forceUpdate()}}/>
                             </div>
                         }
 

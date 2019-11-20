@@ -18,7 +18,7 @@ class Stock extends React.Component{
     {
         super(props)
         this.state = {time: 0};
-        this.timer(Math.floor(Math.random() *  (15000 - 5000) + 5000));
+        //this.timer(Math.floor(Math.random() *  (15000 - 5000) + 5000));
     }
 
     timer(delay: number) {
@@ -51,6 +51,8 @@ class Stock extends React.Component{
                         <td className='list-group list-group-horizontal'>
                             <div className='d-flex align-items-baseline'><input type='number' id={'BuyCount' + this.props.id} min={1} max={this.props.stockCount}/> </div>
                             <div className='d-flex align-items-baseline ml-2'><SpecialButton colour='red' fun={async () => {
+
+                                console.log('BBBBBBBBBBBBBBBBBBBBBBBBBB');
                                 let value = document.getElementById('BuyCount'+this.props.id);
                                 value.stepUp(0);
                                 console.log('BUY count: ' + value.value + '| USER: ' + this.props.userId)
@@ -70,6 +72,12 @@ class Stock extends React.Component{
                                         money: -(parseInt(this.props.stockPrice) * value.value)
                                     };
                                     await this.sendRequest(moneydata, "POST", 'http://localhost:4201/members/edit')
+                                    localStorage.updateSaledStockList = true;
+                                    this.props.updateAll();
+                                    //this.props.update();
+
+                                    //localStorage.updateStockList = true;
+                                    //localStorage.updateMemberList = true;
 
                                 }
                             }}>Buy</SpecialButton></div>
@@ -97,10 +105,13 @@ class Stock extends React.Component{
         if(data)
             opts.body = JSON.stringify(data);
         opts.method = method;
+        localStorage.updateStockList = true;
+        localStorage.updateMemberList = true
         return await fetch(dest, opts)
             .catch(function() {
                 console.log("error");
             });
+
     }
 
     isNobody() {

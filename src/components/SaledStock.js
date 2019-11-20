@@ -10,6 +10,9 @@ class SaledStock extends React.Component {
                 <td><i>{this.props.company}</i></td>
                 <td><samp>{this.props.count}</samp></td>
                 <td><SpecialButton colour='blue' fun={async () => {
+                    console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
+                    localStorage.updateStockList = true;
+                    localStorage.updateSaledStockList = true;
                     console.log('SOLD!')
                     let count = this.props.count;
                     let buydata = {id: this.props.id, number: this.props.count};
@@ -24,6 +27,7 @@ class SaledStock extends React.Component {
                     };
                     //console.log("DAT: ", moneydata, ' count: ', this.props.count)
                     this.sendRequest(moneydata, "POST", 'http://localhost:4201/members/edit')
+                    this.props.update();
                 }}>Sell</SpecialButton></td>
             </tr>
         )
